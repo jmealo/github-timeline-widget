@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Sample GitHub Timeline Widget</title>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="github-timeline-widget.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $("#github-timeline-widget").githubTimelineWidget({'username': 'alindeman', 'limit': 0});
+      });
+    </script>
+  </head>
+  <body>
+    <div id="github-timeline-widget"></div>
+  </body>
+</html>
