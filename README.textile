@@ -1,0 +1,26 @@
+h2. GitHub Timeline Widget
+
+GitHub Timeline Widget is a *jQuery plugin* that displays your *GitHub activity*.
+
+h3. Example
+!https://img.skitch.com/20110102-ftt3nhikwxibr2a9i6a4gff6xu.png(Screenshot of GitHub Timeline Widget)!
+
+h3. Installation
+
+1. Include jQuery in your page.  You can easily include the one from Google Libraries API:
+<pre>&lt;script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"&gt;&lt;/script&gt;</pre>
+
+2. Create a &lt;div&gt; element on your page to hold the widget:
+<pre>&lt;div id="github-timeline-widget"&gt;&lt;/div&gt;</pre>
+
+3. Include the following code snippet, substituting ##GITHUB USERNAME## for your GitHub username:
+<pre>&lt;script type="text/javascript" src="github-timeline-widget.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+$(function() {
+  var options = {
+    'username': '##GITHUB USERNAME##',
+    'limit': 5
+  };
+  $("#github-timeline-widget").githubTimelineWidget(options);
+});
+&lt;/script&gt;</pre>
