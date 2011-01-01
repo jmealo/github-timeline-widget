@@ -1,0 +1,38 @@
+.github-timeline-events {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.github-timeline-event-icon {
+  border: 0px;
+  margin-right: 3px;
+}
+
+.github-timeline-event-link {
+  text-decoration: none;
+}
+
+.github-timeline-event-text {
+  font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif;
+  font-size: 12px;
+  color: #000000;
+}
+
+.github-timeline-event-text strong {
+  font-weight: bold;
+}
+
+.github-timeline-source-link {
+  margin-left: 19px;
+}
+
+.github-timeline-author-link {
+  margin-left: 10px;
+}
+
+.github-timeline-source-link, .github-timeline-author-link {
+  font-size: 10px;
+  text-decoration: none;
+  color: #000080;
+}
