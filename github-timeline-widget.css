@@ -47,15 +47,8 @@
   font-size: 10px;
 }
 
-.github-timeline-source-link, .github-timeline-author-link {
-  margin-left: 19px;
-}
-
 .github-timeline-source-link {
-  display: block;
-}
-
-.github-timeline-source-link, .github-timeline-author-link {
+  margin-left: 19px;
   font-size: 10px;
   text-decoration: none;
   color: #000080;

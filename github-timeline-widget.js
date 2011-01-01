@@ -242,11 +242,6 @@
           .attr('href', 'https://github.com/alindeman/github-timeline-widget')
           .text('GitHub Timeline Widget')
           .appendTo($this);
-        $('<a>')
-          .attr('class', 'github-timeline-author-link')
-          .attr('href', 'http://andylindeman.com')
-          .text('By Andy Lindeman')
-          .appendTo($this);
       });
     });
   };
