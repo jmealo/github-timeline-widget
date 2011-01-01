@@ -8,14 +8,14 @@ h3. Example
 h3. Installation
 
 1. Include jQuery in your page.  You can easily include the one from Google Libraries API:
-<pre>&lt;script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"&gt;&lt;/script&gt;</pre>
+<pre><code><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script></code></pre>
 
-2. Create a &lt;div&gt; element on your page to hold the widget:
-<pre>&lt;div id="github-timeline-widget"&gt;&lt;/div&gt;</pre>
+2. Create a <div> element on your page to hold the widget:
+<pre><code><div id="github-timeline-widget"></div></code></pre>
 
-3. Include the following code snippet, substituting ##GITHUB USERNAME## for your GitHub username:
-<pre>&lt;script type="text/javascript" src="github-timeline-widget.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
+3. Include the following code snippet, substituting _##GITHUB USERNAME##_ for your GitHub username:
+<pre><code><script type="text/javascript" src="https://github.com/alindeman/github-timeline-widget/raw/stable/github-timeline-widget.js"></script>
+<script type="text/javascript">
 $(function() {
   var options = {
     'username': '##GITHUB USERNAME##',
@@ -23,4 +23,4 @@ $(function() {
   };
   $("#github-timeline-widget").githubTimelineWidget(options);
 });
-&lt;/script&gt;</pre>
+</script></code></pre>
