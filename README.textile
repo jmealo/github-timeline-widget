@@ -26,3 +26,6 @@ $(function() {
   $("#github-timeline-widget").githubTimelineWidget(options);
 });
 </script></code></pre>
+
+4. Optional: Style it with CSS
+Feel free to tweak how it look using CSS.  I have attempted to add *class* attributes to all elements that you may want to style.
