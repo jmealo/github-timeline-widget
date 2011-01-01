@@ -10,7 +10,7 @@ h3. Steps To Add To Your Website
 1. Include jQuery in your page.  You can easily include the one from Google Libraries API:
 <pre><code><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script></code></pre>
 
-2. Create a <div> element on your page to hold the widget:
+2. Create a &lt;div&gt; element on your page to hold the widget:
 <pre><code><div id="github-timeline-widget"></div></code></pre>
 
 3. Include the following code snippet, substituting _##GITHUB USERNAME##_ for your GitHub username:
