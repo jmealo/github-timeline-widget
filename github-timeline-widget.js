@@ -200,7 +200,7 @@
       // https://github.com/{username}.json
       $.ajaxSetup({cache: true});
       $.getJSON('https://github.com/' + it.opts.username + '.json?callback=?', function(data) {
-        list = $('<ul>')
+        var list = $('<ul>')
           .attr('class', 'github-timeline-events')
           .appendTo($this);
 
@@ -213,6 +213,17 @@
           }
           i++;
         }
+
+        $('<a>')
+          .attr('class', 'github-timeline-source-link')
+          .attr('href', 'https://github.com/alindeman/github-timeline-widget')
+          .text('GitHub Timeline Widget')
+          .appendTo($this);
+        $('<a>')
+          .attr('class', 'github-timeline-author-link')
+          .attr('href', 'http://andylindeman.com')
+          .text('By Andy Lindeman')
+          .appendTo($this);
       });
     });
   };
