@@ -41,7 +41,7 @@
       return; // bomb out: nothing to link to
     }
 
-    event_time = 0;
+    event_time = '';
     if ('created_at' in event) {
       event_time = event['created_at'];
     }
@@ -191,7 +191,7 @@
         .appendTo(list_item)
         .wrapInner(event_link);
 
-      if (event_time != 0) {
+      if (event_time != '') {
         $('<div>')
           .attr('class', 'github-timeline-event-time')
           .text(GithubTimelineFunctions.timeAgo(event_time))
