@@ -167,23 +167,24 @@
     }
 
     if (text != '') {
-      list_item = $('<li>')
+      var list_item = $('<li>')
         .attr('class', 'github-timeline-event')
         .appendTo(list);
 
-      link_item = $('<a>')
-        .attr('class', 'github-timeline-event-link')
-        .attr('href', event_url)
-        .appendTo(list_item);
+      var event_link = $('<a>')
+        .attr('href', event_url);
 
-      $('<img/>')
-        .attr('class', 'github-timeline-event-icon')
+      $('<img>')
         .attr('src', image_url)
-        .appendTo(link_item);
-      $('<span>')
+        .appendTo(list_item)
+        .wrap($('<div>').attr('class', 'github-timeline-event-icon'))
+        .wrap(event_link);
+
+      $('<div>')
         .attr('class', 'github-timeline-event-text')
         .html(text)
-        .appendTo(link_item);
+        .appendTo(list_item)
+        .wrapInner(event_link);
     }
   }
 
@@ -200,10 +201,19 @@
       // https://github.com/{username}.json
       $.ajaxSetup({cache: true});
       $.getJSON('https://github.com/' + it.opts.username + '.json?callback=?', function(data) {
+        // Header
+        $('<a>')
+          .attr('class', 'github-timeline-header')
+          .attr('href', 'https://github.com/' + it.opts.username)
+          .text(it.opts.username + ' on GitHub')
+          .appendTo($this);
+
+        // List
         var list = $('<ul>')
           .attr('class', 'github-timeline-events')
           .appendTo($this);
 
+        // Each event
         i = 0;
         for (index in data) {
           GithubTimelineFunctions.appendEvent(data[index], list);
@@ -214,6 +224,7 @@
           i++;
         }
 
+        // Footer (bylines)
         $('<a>')
           .attr('class', 'github-timeline-source-link')
           .attr('href', 'https://github.com/alindeman/github-timeline-widget')

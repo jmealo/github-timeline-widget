@@ -1,26 +1,46 @@
+.github-timeline-header {
+  font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif;
+  font-size: 14px;
+  color: #000000;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
 .github-timeline-events {
   list-style: none;
   padding: 0px;
   margin: 0px;
 }
 
-.github-timeline-event-icon {
-  border: 0px;
-  margin-right: 3px;
+.github-timeline-event {
+  clear: both;
+  margin-bottom: 2px;
 }
 
-.github-timeline-event-link {
-  text-decoration: none;
+.github-timeline-event-icon {
+  display: block;
+  float: left;
+  width: 19px;
+}
+
+.github-timeline-event-icon img {
+  border: 0px;
 }
 
 .github-timeline-event-text {
   font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif;
   font-size: 12px;
+  display: block;
+  margin-left: 19px;
+}
+
+.github-timeline-event-text a {
   color: #000000;
+  text-decoration: none;
 }
 
 .github-timeline-event-text strong {
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 .github-timeline-source-link {
