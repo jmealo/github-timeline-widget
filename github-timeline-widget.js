@@ -215,3 +215,21 @@
     });
   };
 })( jQuery );
+
+$(function() {
+  // Determine where the stylesheet is located (relative to the location of this script)
+  var script_path = '';
+  var scripts = document.getElementsByTagName('script');
+  for (var i = 0; i < scripts.length; i++) {
+    if ('src' in scripts[i] && scripts[i].src.match(/github-timeline-widget\.js/)) {
+      script_path = scripts[i].src.replace(/github-timeline-widget\.js.*$/, '');
+      break;
+    }
+  }
+
+  $('<link/>')
+    .attr('rel', 'stylesheet')
+    .attr('type', 'text/css')
+    .attr('href', script_path + 'github-timeline-widget.css')
+    .prependTo('head');
+});
