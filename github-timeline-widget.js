@@ -1,9 +1,35 @@
 (function( $ ){
-  function githubTimelineWidgetStrongify(text) {
+  var GithubTimelineFunctions = {};
+
+  /*
+   * JavaScript Pretty Date
+   * Copyright (c) 2008 John Resig (jquery.com)
+   * Licensed under the MIT license.
+   */
+  GithubTimelineFunctions.timeAgo = function(time){
+    var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
+      diff = (((new Date()).getTime() - date.getTime()) / 1000),
+      day_diff = Math.floor(diff / 86400);
+
+    if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+      return;
+
+    return day_diff == 0 &&
+        (diff < 60 && "just now" ||
+        diff < 120 && "1 minute ago" ||
+        diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+        diff < 7200 && "1 hour ago" ||
+        diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+      day_diff == 1 && "Yesterday" ||
+      day_diff < 7 && day_diff + " days ago" ||
+      day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+  }
+
+  GithubTimelineFunctions.strongify = function(text) {
     return '<strong>' + text + '</strong>';
   }
 
-  function githubTimelineWidgetAppendEvent(event, list) {
+  GithubTimelineFunctions.appendEvent = function(event, list) {
     event_url = '';
     if ('url' in event) {
       event_url = event['url'];
@@ -19,7 +45,7 @@
 
     repository_strongified = '';
     if ('repository' in event) {
-      repository_strongified = githubTimelineWidgetStrongify(event['repository']['owner'] + '/' + event['repository']['name']);
+      repository_strongified = GithubTimelineFunctions.strongify(event['repository']['owner'] + '/' + event['repository']['name']);
     }
 
     image_url = '';
@@ -33,10 +59,10 @@
         text = 'created repo ' + repository_strongified;
         break;
       case 'tag':
-        text = 'created tag ' + githubTimelineWidgetStrongify(event['payload']['object_name']) + ' at ' + repository_strongified;
+        text = 'created tag ' + GithubTimelineFunctions.strongify(event['payload']['object_name']) + ' at ' + repository_strongified;
         break;
       case 'branch':
-        text = 'created branch ' + githubTimelineWidgetStrongify(event['payload']['object_name']) + ' at ' + repository_strongified;
+        text = 'created branch ' + GithubTimelineFunctions.strongify(event['payload']['object_name']) + ' at ' + repository_strongified;
         break;
       }
 
@@ -45,14 +71,14 @@
       switch(event['payload']['action']) {
       case 'added':
         image_url = 'https://github.com/images/modules/dashboard/news/member_add.png';
-        text = 'added ' + githubTimelineWidgetStrongify(event['payload']['member']) + ' to ' + repository_strongified;
+        text = 'added ' + GithubTimelineFunctions.strongify(event['payload']['member']) + ' to ' + repository_strongified;
         break;
       }
 
       break;
     case 'PushEvent':
       image_url = 'https://github.com/images/modules/dashboard/news/push.png';
-      text = 'pushed to ' + githubTimelineWidgetStrongify(event['payload']['ref'].substr(event['payload']['ref'].lastIndexOf('/') + 1)) + ' at ' + repository_strongified;
+      text = 'pushed to ' + GithubTimelineFunctions.strongify(event['payload']['ref'].substr(event['payload']['ref'].lastIndexOf('/') + 1)) + ' at ' + repository_strongified;
       break;
     case 'ForkApplyEvent':
       image_url = 'https://github.com/images/modules/dashboard/news/merge.png';
@@ -98,13 +124,13 @@
       
       switch(event['payload']['action']) {
       case 'create':
-        text = 'created ' + githubTimelineWidgetStrongify(event['payload']['name']);
+        text = 'created ' + GithubTimelineFunctions.strongify(event['payload']['name']);
         break;
       case 'update':
-        text = 'updated ' + githubTimelineWidgetStrongify(event['payload']['name']);
+        text = 'updated ' + GithubTimelineFunctions.strongify(event['payload']['name']);
         break;
       case 'fork':
-        text = 'forked ' + githubTimelineWidgetStrongify(event['payload']['name']);
+        text = 'forked ' + GithubTimelineFunctions.strongify(event['payload']['name']);
         break;
       }
 
@@ -178,7 +204,7 @@
 
         i = 0;
         for (index in data) {
-          githubTimelineWidgetAppendEvent(data[index], list);
+          GithubTimelineFunctions.appendEvent(data[index], list);
 
           i++;
           if (it.opts.limit > 0 && i >= it.opts.limit) {
