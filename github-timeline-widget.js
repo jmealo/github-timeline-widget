@@ -7,7 +7,7 @@
    * Licensed under the MIT license.
    */
   GithubTimelineFunctions.timeAgo = function(time){
-    var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
+    var date = new Date(time),
       diff = (((new Date()).getTime() - date.getTime()) / 1000),
       day_diff = Math.floor(diff / 86400);
 
@@ -39,6 +39,11 @@
       event_url = event['payload']['url'];
     } else {
       return; // bomb out: nothing to link to
+    }
+
+    event_time = 0;
+    if ('created_at' in event) {
+      event_time = event['created_at'];
     }
 
     // FIX for GitHub URL bug?
@@ -180,11 +185,18 @@
         .wrap($('<div>').attr('class', 'github-timeline-event-icon'))
         .wrap(event_link);
 
-      $('<div>')
+      var div_text = $('<div>')
         .attr('class', 'github-timeline-event-text')
         .html(text)
         .appendTo(list_item)
         .wrapInner(event_link);
+
+      if (event_time != 0) {
+        $('<div>')
+          .attr('class', 'github-timeline-event-time')
+          .text(GithubTimelineFunctions.timeAgo(event_time))
+          .appendTo(div_text);
+      }
     }
   }
 

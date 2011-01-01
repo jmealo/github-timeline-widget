@@ -43,6 +43,10 @@
   font-weight: bolder;
 }
 
+.github-timeline-event-time {
+  font-size: 10px;
+}
+
 .github-timeline-source-link {
   margin-left: 19px;
 }
