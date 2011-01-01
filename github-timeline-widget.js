@@ -25,10 +25,12 @@
       day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
   }
 
+  // Add <strong> tags around text
   GithubTimelineFunctions.strongify = function(text) {
     return '<strong>' + text + '</strong>';
   }
 
+  // Append the Github timeline event to the specified list element
   GithubTimelineFunctions.appendEvent = function(event, list) {
     event_url = '';
     if ('url' in event) {
@@ -216,6 +218,7 @@
   };
 })( jQuery );
 
+// Load stylesheet
 $(function() {
   // Determine where the stylesheet is located (relative to the location of this script)
   var script_path = '';
