@@ -2,10 +2,10 @@ h2. GitHub Timeline Widget
 
 GitHub Timeline Widget is a *jQuery plugin* that displays your *GitHub activity*.
 
-h3. Example
+h3. Screenshot
 !https://img.skitch.com/20110102-ftt3nhikwxibr2a9i6a4gff6xu.png(Screenshot of GitHub Timeline Widget)!
 
-h3. Installation
+h3. Steps To Add To Your Website
 
 1. Include jQuery in your page.  You can easily include the one from Google Libraries API:
 <pre><code><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script></code></pre>
