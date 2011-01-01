@@ -208,10 +208,10 @@
         for (index in data) {
           GithubTimelineFunctions.appendEvent(data[index], list);
 
-          i++;
           if (it.opts.limit > 0 && i >= it.opts.limit) {
             break;
           }
+          i++;
         }
       });
     });
