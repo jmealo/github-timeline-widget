@@ -168,11 +168,22 @@
   })();
   $ = jQuery;
   $.fn.githubTimelineWidget = function(options) {
-    var defaults;
+    var defaults, script, script_path, scripts, _i, _len, _ref;
     defaults = {
       username: 'timeline',
       limit: 5
     };
+    scripts = document.getElementsByTagName('script');
+    for (_i = 0, _len = scripts.length; _i < _len; _i++) {
+      script = scripts[_i];
+      if ((_ref = script.src) != null ? _ref.match.match(/github-timeline-widget\.js/) : void 0) {
+        script_path = script.src.replace(/github-timeline-widget\.js.*$/, '');
+        break;
+      }
+    }
+    if (script_path != null) {
+      $('<link/>').attr('rel', 'stylesheet').attr('type', 'text/css').attr('href', script_path + 'github-timeline-widget.css').prependTo('head');
+    }
     return this.each(function() {
       var $this, api, it, list;
       it = this;

@@ -4,6 +4,21 @@ $.fn.githubTimelineWidget = (options) ->
     username: 'timeline'
     limit: 5
 
+  # Determine where the stylesheet is located (relative to the location of this script)
+  scripts = document.getElementsByTagName 'script'
+  for script in scripts
+    if script.src?.match.match /github-timeline-widget\.js/
+      script_path = script.src.replace /github-timeline-widget\.js.*$/, ''
+      break
+
+  # Load stylesheet
+  if script_path?
+    $('<link/>')
+    .attr('rel', 'stylesheet')
+    .attr('type', 'text/css')
+    .attr('href', script_path + 'github-timeline-widget.css')
+    .prependTo('head');
+
   this.each ->
     it = this
     $this = $(this)
