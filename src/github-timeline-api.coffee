@@ -31,18 +31,6 @@ class GitHubTimelineApi
     else
       "#{Math.ceil day_diff/7} weeks ago"
 
-  # Parses the JSON data that is returned from the GitHub timeline API
-  # Calls the callback function passing an array with structure:
-  # [ [url_0, icon_url_0, timestamp_0, text_0], ..., [url_n, icon_url_n, timestamp_n, text_n] ]
-  _parseGitHubTimeline: (data, callback) ->
-    events = []
-    for event in data
-      event_data = _parseGitHubEvent event
-      if event_data
-        events.push event_data
-    
-    callback events
-
   # Parses an individual GitHub timeline event into an array with structure:
   # [url, icon_url, timestamp, text]
   # Returns an empty array if the event cannot be parsed.
@@ -140,9 +128,21 @@ class GitHubTimelineApi
     else
       []
   
+  # Parses the JSON data that is returned from the GitHub timeline API
+  # Calls the callback function passing an array with structure:
+  # [ [url_0, icon_url_0, timestamp_0, text_0], ..., [url_n, icon_url_n, timestamp_n, text_n] ]
+  _parseGitHubTimeline: (data, callback) ->
+    events = []
+    for event in data
+      event_data = _parseGitHubEvent event
+      if event_data
+        events.push event_data
+    
+    callback events
+  
   # Fetches the GitHub timeline for the specified user
   # Calls the callback function passing an array with structure:
   # [ [url_0, icon_url_0, timestamp_0, text_0], ..., [url_n, icon_url_n, timestamp_n, text_n] ]
   getTimelineForUser: (user, callback) ->
     $.ajaxSetup { cache: true }
-    $.getJSON 'https://github.com/' + user + '.json?callback=?', (data) -> _parseGitHubTimeline(data, callback)
+    $.getJSON 'https://github.com/' + user + '.json?callback=?', (data) => _parseGitHubTimeline(data, callback)

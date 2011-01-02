@@ -1,5 +1,6 @@
 (function() {
   var $, GitHubTimelineApi;
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   $ = jQuery;
   GitHubTimelineApi = (function() {
     function GitHubTimelineApi() {}
@@ -32,18 +33,6 @@
       } else {
         return "" + (Math.ceil(day_diff / 7)) + " weeks ago";
       }
-    };
-    GitHubTimelineApi.prototype._parseGitHubTimeline = function(data, callback) {
-      var event, event_data, events, _i, _len;
-      events = [];
-      for (_i = 0, _len = data.length; _i < _len; _i++) {
-        event = data[_i];
-        event_data = _parseGitHubEvent(event);
-        if (event_data) {
-          events.push(event_data);
-        }
-      }
-      return callback(events);
     };
     GitHubTimelineApi.prototype._parseGitHubEvent = function(event) {
       var branch, icon_url, repository, text, timestamp, url, _ref;
@@ -157,13 +146,25 @@
         return [];
       }
     };
+    GitHubTimelineApi.prototype._parseGitHubTimeline = function(data, callback) {
+      var event, event_data, events, _i, _len;
+      events = [];
+      for (_i = 0, _len = data.length; _i < _len; _i++) {
+        event = data[_i];
+        event_data = _parseGitHubEvent(event);
+        if (event_data) {
+          events.push(event_data);
+        }
+      }
+      return callback(events);
+    };
     GitHubTimelineApi.prototype.getTimelineForUser = function(user, callback) {
       $.ajaxSetup({
         cache: true
       });
-      return $.getJSON('https://github.com/' + user + '.json?callback=?', function(data) {
+      return $.getJSON('https://github.com/' + user + '.json?callback=?', __bind(function(data) {
         return _parseGitHubTimeline(data, callback);
-      });
+      }, this));
     };
     return GitHubTimelineApi;
   })();
