@@ -152,7 +152,7 @@
       for (_i = 0, _len = data.length; _i < _len; _i++) {
         event = data[_i];
         event_data = this._parseGitHubEvent(event);
-        if (event_data) {
+        if (event_data.length) {
           events.push(event_data);
         }
       }

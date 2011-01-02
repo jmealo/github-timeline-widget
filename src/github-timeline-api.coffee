@@ -136,7 +136,7 @@ class GitHubTimelineApi
     events = []
     for event in data
       event_data = this._parseGitHubEvent event
-      if event_data
+      if event_data.length
         events.push event_data
     
     callback events
