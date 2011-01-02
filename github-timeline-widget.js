@@ -1,5 +1,6 @@
 (function() {
   var $, GitHubTimelineApi;
+  $ = jQuery;
   GitHubTimelineApi = (function() {
     function GitHubTimelineApi() {}
     GitHubTimelineApi.prototype.formatAsTimeAgo = function(date) {

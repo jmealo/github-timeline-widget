@@ -1,3 +1,4 @@
+$ = jQuery
 class GitHubTimelineApi
   # Converts the date into a human readable "time ago" form
   # e.g., "just now" or "Yesterday"
