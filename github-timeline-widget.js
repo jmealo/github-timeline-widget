@@ -192,10 +192,13 @@
         .wrapInner(event_link);
 
       if (event_time) {
-        $('<div>')
-          .attr('class', 'github-timeline-event-time')
-          .text(GithubTimelineFunctions.timeAgo(event_time))
-          .appendTo(div_text);
+        event_time_text = GithubTimelineFunctions.timeAgo(event_time);
+        if (event_time_text) {
+          $('<div>')
+            .attr('class', 'github-timeline-event-time')
+            .text(event_time_text)
+            .appendTo(div_text);
+        }
       }
     }
   }
