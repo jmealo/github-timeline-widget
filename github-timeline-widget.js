@@ -40,7 +40,7 @@
       url = url.replace('github.com//', 'github.com/');
       timestamp = new Date((event.created_at != null ? event.created_at : void 0) || 0);
       if (event.repository != null) {
-        repository = this._strongify(event.repository);
+        repository = this._strongify("" + event.repository.owner + "/" + event.repository.name);
       }
       switch (event.type) {
         case 'CreateEvent':

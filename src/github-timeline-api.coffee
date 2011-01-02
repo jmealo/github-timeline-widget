@@ -45,7 +45,8 @@ class GitHubTimelineApi
     timestamp = new Date (event.created_at if event.created_at?) || 0
 
     # Pull out repository if it exists
-    repository = this._strongify event.repository if event.repository?
+    if event.repository?
+      repository = this._strongify "#{event.repository.owner}/#{event.repository.name}"
 
     # Based on event type, set icon_url and text
     switch event.type
