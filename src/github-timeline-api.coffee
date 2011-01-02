@@ -2,17 +2,17 @@ class GitHubTimelineApi
   # Fetches the GitHub timeline for the specified user
   # Calls the callback function passing an array with structure:
   # [ [url_0, icon_url_0, timestamp_0, text_0], ..., [url_n, icon_url_n, timestamp_n, text_n] ]
-  get_timeline_for_user: (user, callback) ->
+  getTimelineForUser: (user, callback) ->
     $.ajaxSetup { cache: true }
-    $.getJSON 'https://github.com/' + user + '.json?callback=?', (data) -> _parse_github_timeline(data, callback)
+    $.getJSON 'https://github.com/' + user + '.json?callback=?', (data) -> _parseGitHubTimeline(data, callback)
 
   # Parses the JSON data that is returned from the GitHub timeline API
   # Calls the callback function passing an array with structure:
   # [ [url_0, icon_url_0, timestamp_0, text_0], ..., [url_n, icon_url_n, timestamp_n, text_n] ]
-  _parse_github_timeline: (data, callback) ->
+  _parseGitHubTimeline: (data, callback) ->
     events = []
     for event in data
-      event_data = _parse_github_event event
+      event_data = _parseGitHubEvent event
       if event_data
         events.push event_data
     
@@ -21,7 +21,7 @@ class GitHubTimelineApi
   # Parses an individual GitHub timeline event into an array with structure:
   # [url, icon_url, timestamp, text]
   # Returns an empty array if the event cannot be parsed.
-  _parse_github_event: (event) ->
+  _parseGitHubEvent: (event) ->
     # URL could be event.url or event.payload.url
     url = (event.url if event.url?) || (event.payload.url if event.payload?.url?) || 'https://github.com'
 
