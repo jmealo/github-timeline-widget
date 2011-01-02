@@ -132,7 +132,11 @@
           text = "commented on " + repository;
           break;
         case 'DeleteEvent':
-          text = null;
+          icon_url = 'https://github.com/images/modules/dashboard/news/delete.png';
+          switch (event.payload.ref_type) {
+            case 'branch':
+              text = "deleted branch " + (this._strongify(event.payload.ref)) + " at " + repository;
+          }
           break;
         case 'PublicEvent':
           text = null;

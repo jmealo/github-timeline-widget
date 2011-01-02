@@ -115,8 +115,11 @@ class GitHubTimelineApi
         icon_url = 'https://github.com/images/modules/dashboard/news/comment.png'
         text = "commented on #{repository}"
       when 'DeleteEvent'
-        # TODO: What is this?
-        text = null
+        icon_url = 'https://github.com/images/modules/dashboard/news/delete.png'
+        switch event.payload.ref_type
+          when 'branch'
+            text = "deleted branch #{this._strongify event.payload.ref} at #{repository}"
+          # TODO: More?
       when 'PublicEvent'
         # TODO: What is this?
         text = null
