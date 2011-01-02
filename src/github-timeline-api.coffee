@@ -145,4 +145,4 @@ class GitHubTimelineApi
   # [ [url_0, icon_url_0, timestamp_0, text_0], ..., [url_n, icon_url_n, timestamp_n, text_n] ]
   getTimelineForUser: (user, callback) ->
     $.ajaxSetup { cache: true }
-    $.getJSON 'https://github.com/' + user + '.json?callback=?', (data) => _parseGitHubTimeline(data, callback)
+    $.getJSON 'https://github.com/' + user + '.json?callback=?', (data) => this._parseGitHubTimeline(data, callback)

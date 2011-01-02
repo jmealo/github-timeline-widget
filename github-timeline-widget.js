@@ -163,7 +163,7 @@
         cache: true
       });
       return $.getJSON('https://github.com/' + user + '.json?callback=?', __bind(function(data) {
-        return _parseGitHubTimeline(data, callback);
+        return this._parseGitHubTimeline(data, callback);
       }, this));
     };
     return GitHubTimelineApi;
