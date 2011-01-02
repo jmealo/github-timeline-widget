@@ -3,6 +3,9 @@
   $ = jQuery;
   GitHubTimelineApi = (function() {
     function GitHubTimelineApi() {}
+    GitHubTimelineApi.prototype._strongify = function(string) {
+      return '<strong>' + string + '</strong>';
+    };
     GitHubTimelineApi.prototype.formatAsTimeAgo = function(date) {
       var day_diff, diff;
       diff = ((new DateTime).getTime - date.getTime) / 1000;
@@ -29,14 +32,6 @@
       } else {
         return "" + (Math.ceil(day_diff / 7)) + " weeks ago";
       }
-    };
-    GitHubTimelineApi.prototype.getTimelineForUser = function(user, callback) {
-      $.ajaxSetup({
-        cache: true
-      });
-      return $.getJSON('https://github.com/' + user + '.json?callback=?', function(data) {
-        return _parseGitHubTimeline(data, callback);
-      });
     };
     GitHubTimelineApi.prototype._parseGitHubTimeline = function(data, callback) {
       var event, event_data, events, _i, _len;
@@ -162,8 +157,13 @@
         return [];
       }
     };
-    GitHubTimelineApi.prototype._strongify = function(string) {
-      return '<strong>' + string + '</strong>';
+    GitHubTimelineApi.prototype.getTimelineForUser = function(user, callback) {
+      $.ajaxSetup({
+        cache: true
+      });
+      return $.getJSON('https://github.com/' + user + '.json?callback=?', function(data) {
+        return _parseGitHubTimeline(data, callback);
+      });
     };
     return GitHubTimelineApi;
   })();

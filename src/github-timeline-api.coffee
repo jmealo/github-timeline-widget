@@ -1,5 +1,9 @@
 $ = jQuery
 class GitHubTimelineApi
+  # Adds <strong> tags around a string
+  _strongify: (string) ->
+    '<strong>' + string + '</strong>'
+  
   # Converts the date into a human readable "time ago" form
   # e.g., "just now" or "Yesterday"
   formatAsTimeAgo: (date) ->
@@ -26,13 +30,6 @@ class GitHubTimelineApi
       "#{day_diff} days ago"
     else
       "#{Math.ceil day_diff/7} weeks ago"
-
-  # Fetches the GitHub timeline for the specified user
-  # Calls the callback function passing an array with structure:
-  # [ [url_0, icon_url_0, timestamp_0, text_0], ..., [url_n, icon_url_n, timestamp_n, text_n] ]
-  getTimelineForUser: (user, callback) ->
-    $.ajaxSetup { cache: true }
-    $.getJSON 'https://github.com/' + user + '.json?callback=?', (data) -> _parseGitHubTimeline(data, callback)
 
   # Parses the JSON data that is returned from the GitHub timeline API
   # Calls the callback function passing an array with structure:
@@ -143,6 +140,9 @@ class GitHubTimelineApi
     else
       []
   
-  # Adds <strong> tags around a string
-  _strongify: (string) ->
-    '<strong>' + string + '</strong>'
+  # Fetches the GitHub timeline for the specified user
+  # Calls the callback function passing an array with structure:
+  # [ [url_0, icon_url_0, timestamp_0, text_0], ..., [url_n, icon_url_n, timestamp_n, text_n] ]
+  getTimelineForUser: (user, callback) ->
+    $.ajaxSetup { cache: true }
+    $.getJSON 'https://github.com/' + user + '.json?callback=?', (data) -> _parseGitHubTimeline(data, callback)
