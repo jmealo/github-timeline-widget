@@ -56,11 +56,12 @@ $.fn.githubTimelineWidget = (options) ->
         event_link = $('<a>')
           .attr('href', url)
 
-        $('<img>')
-          .attr('src', icon_url)
-          .appendTo(list_item)
-          .wrap($('<div>').attr('class', 'github-timeline-event-icon'))
-          .wrap(event_link)
+        if icon_url
+          $('<img>')
+            .attr('src', icon_url)
+            .appendTo(list_item)
+            .wrap($('<div>').attr('class', 'github-timeline-event-icon'))
+            .wrap(event_link)
 
         div_text = $('<div>')
           .attr('class', 'github-timeline-event-text')
