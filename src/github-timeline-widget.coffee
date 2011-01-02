@@ -7,7 +7,7 @@ $.fn.githubTimelineWidget = (options) ->
   # Determine where the stylesheet is located (relative to the location of this script)
   scripts = document.getElementsByTagName 'script'
   for script in scripts
-    if script.src?.match.match /github-timeline-widget\.js/
+    if script.src?.match /github-timeline-widget\.js/
       script_path = script.src.replace /github-timeline-widget\.js.*$/, ''
       break
 

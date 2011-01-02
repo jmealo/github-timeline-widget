@@ -177,7 +177,7 @@
     scripts = document.getElementsByTagName('script');
     for (_i = 0, _len = scripts.length; _i < _len; _i++) {
       script = scripts[_i];
-      if ((_ref = script.src) != null ? _ref.match.match(/github-timeline-widget\.js/) : void 0) {
+      if ((_ref = script.src) != null ? _ref.match(/github-timeline-widget\.js/) : void 0) {
         script_path = script.src.replace(/github-timeline-widget\.js.*$/, '');
         break;
       }
