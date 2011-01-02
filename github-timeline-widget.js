@@ -171,7 +171,7 @@
       break;
     }
 
-    if (text != '') {
+    if (text) {
       var list_item = $('<li>')
         .attr('class', 'github-timeline-event')
         .appendTo(list);
@@ -191,7 +191,7 @@
         .appendTo(list_item)
         .wrapInner(event_link);
 
-      if (event_time != '') {
+      if (event_time) {
         $('<div>')
           .attr('class', 'github-timeline-event-time')
           .text(GithubTimelineFunctions.timeAgo(event_time))
