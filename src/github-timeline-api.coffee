@@ -45,7 +45,7 @@ class GitHubTimelineApi
     timestamp = new Date (event.created_at if event.created_at?) || 0
 
     # Pull out repository if it exists
-    repository = _strongify event.repository if event.repository?
+    repository = this._strongify event.repository if event.repository?
 
     # Based on event type, set icon_url and text
     switch event.type
@@ -55,19 +55,19 @@ class GitHubTimelineApi
           when 'repository'
             text = "created repo #{repository}"
           when 'tag'
-            text = "created tag #{_strongify event.payload.object_name} at #{repository}"
+            text = "created tag #{this._strongify event.payload.object_name} at #{repository}"
           when 'branch'
-            text = "created branch #{_strongify event.payload.object_name} at #{repository}"
+            text = "created branch #{this._strongify event.payload.object_name} at #{repository}"
       when 'MemberEvent'
         switch event.payload.action
           when 'added'
             icon_url = 'https://github.com/images/modules/dashboard/news/member_add.png'
-            text = "added #{_strongify event.payload.member} to #{repository}"
+            text = "added #{this._strongify event.payload.member} to #{repository}"
           # TODO: There are likely more types 
       when 'PushEvent'
         branch = event.payload.ref.substr event.payload.ref.lastIndexOf('/')+1
         icon_url = 'https://github.com/images/modules/dashboard/news/push.png'
-        text = "pushed to #{_strongify branch} at #{repository}"
+        text = "pushed to #{this._strongify branch} at #{repository}"
       when 'ForkApplyEvent'
         icon_url = 'https://github.com/images/modules/dashboard/news/merge.png'
         text = "merged to #{repository}"
@@ -98,11 +98,11 @@ class GitHubTimelineApi
         icon_url = 'https://github.com/images/modules/dashboard/news/gist.png'
         switch event.payload.action
           when 'create'
-            text = "created #{_strongify event.payload.name}"
+            text = "created #{this._strongify event.payload.name}"
           when 'update'
-            text = "updated #{_strongify event.payload.name}"
+            text = "updated #{this._strongify event.payload.name}"
           when 'fork'
-            text = "forked #{_strongify event.payload.name}"
+            text = "forked #{this._strongify event.payload.name}"
       when 'WikiEvent', 'GollumEvent'
         icon_url = 'https://github.com/images/modules/dashboard/news/wiki.png'
         switch event.payload.action
@@ -134,7 +134,7 @@ class GitHubTimelineApi
   _parseGitHubTimeline: (data, callback) ->
     events = []
     for event in data
-      event_data = _parseGitHubEvent event
+      event_data = this._parseGitHubEvent event
       if event_data
         events.push event_data
     

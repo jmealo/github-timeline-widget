@@ -40,7 +40,7 @@
       url = url.replace('github.com//', 'github.com/');
       timestamp = new Date((event.created_at != null ? event.created_at : void 0) || 0);
       if (event.repository != null) {
-        repository = _strongify(event.repository);
+        repository = this._strongify(event.repository);
       }
       switch (event.type) {
         case 'CreateEvent':
@@ -50,23 +50,23 @@
               text = "created repo " + repository;
               break;
             case 'tag':
-              text = "created tag " + (_strongify(event.payload.object_name)) + " at " + repository;
+              text = "created tag " + (this._strongify(event.payload.object_name)) + " at " + repository;
               break;
             case 'branch':
-              text = "created branch " + (_strongify(event.payload.object_name)) + " at " + repository;
+              text = "created branch " + (this._strongify(event.payload.object_name)) + " at " + repository;
           }
           break;
         case 'MemberEvent':
           switch (event.payload.action) {
             case 'added':
               icon_url = 'https://github.com/images/modules/dashboard/news/member_add.png';
-              text = "added " + (_strongify(event.payload.member)) + " to " + repository;
+              text = "added " + (this._strongify(event.payload.member)) + " to " + repository;
           }
           break;
         case 'PushEvent':
           branch = event.payload.ref.substr(event.payload.ref.lastIndexOf('/') + 1);
           icon_url = 'https://github.com/images/modules/dashboard/news/push.png';
-          text = "pushed to " + (_strongify(branch)) + " at " + repository;
+          text = "pushed to " + (this._strongify(branch)) + " at " + repository;
           break;
         case 'ForkApplyEvent':
           icon_url = 'https://github.com/images/modules/dashboard/news/merge.png';
@@ -107,13 +107,13 @@
           icon_url = 'https://github.com/images/modules/dashboard/news/gist.png';
           switch (event.payload.action) {
             case 'create':
-              text = "created " + (_strongify(event.payload.name));
+              text = "created " + (this._strongify(event.payload.name));
               break;
             case 'update':
-              text = "updated " + (_strongify(event.payload.name));
+              text = "updated " + (this._strongify(event.payload.name));
               break;
             case 'fork':
-              text = "forked " + (_strongify(event.payload.name));
+              text = "forked " + (this._strongify(event.payload.name));
           }
           break;
         case 'WikiEvent':
@@ -151,7 +151,7 @@
       events = [];
       for (_i = 0, _len = data.length; _i < _len; _i++) {
         event = data[_i];
-        event_data = _parseGitHubEvent(event);
+        event_data = this._parseGitHubEvent(event);
         if (event_data) {
           events.push(event_data);
         }
