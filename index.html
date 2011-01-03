@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>GitHub Timeline Widget Demonstration</title>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://github.com/alindeman/github-timeline-widget/raw/stable/github-timeline-widget.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('#github-username-field').focus();
+
+        $('#github-username-form').submit(function() {
+          var options = {
+            'username': $('#github-username-field').val(),
+          };
+
+          $('#github-timeline-widget').empty();
+          $('#github-timeline-widget').githubTimelineWidget(options);
+          return false;
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form id="github-username-form" action="#">
+      <label for="github-username-field">GitHub Username</label>
+      <input type="text" name="github-username-field" id="github-username-field"/>
+
+      <input type="submit" value="Show Widget">
+    </form>
+
+    <hr/>
+
+    <div id="github-timeline-widget" style="width: 250px"></div>
+  </body>
+</html>
