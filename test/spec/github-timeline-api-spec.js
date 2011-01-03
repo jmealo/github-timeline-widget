@@ -22,8 +22,9 @@ describe('GitHubTimelineApi', function() {
     api = new GitHubTimelineApi();
 
     unixTimeNow = new Date().valueOf();
+    jsonResponse = [];
   });
-  
+
   describe("getTimelineForUser", function() {
     it("should make an AJAX request for the correct URL", function() {
       api.getTimelineForUser('alindeman', function(events) { });
@@ -56,6 +57,24 @@ describe('GitHubTimelineApi', function() {
             'https://github.com/images/modules/dashboard/news/create.png',
             timestamp.valueOf(),
             'created repo <strong>alindeman/github-timeline-widget</strong>']]);
+      });
+      
+      it("parses a tag create event", function() {
+        timestamp = truncateTimeToSecond(new Date(unixTimeNow - 30));
+        jsonResponse.push({url: 'https://github.com/foo/bar',
+          created_at: timestamp.toString(),
+          repository: {owner: 'alindeman', name: 'github-timeline-widget'},
+          type: 'CreateEvent',
+          payload: {object: 'tag', object_name: 'v1.0'}});
+
+        callbackSpy = jasmine.createSpy();
+        api.getTimelineForUser('alindeman', callbackSpy);
+
+        expect(callbackSpy).toHaveBeenCalledWith(
+          [['https://github.com/foo/bar',
+            'https://github.com/images/modules/dashboard/news/create.png',
+            timestamp.valueOf(),
+            'created tag <strong>v1.0</strong> at <strong>alindeman/github-timeline-widget</strong>']]);
       });
     });
   });
