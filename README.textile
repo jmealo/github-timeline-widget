@@ -30,4 +30,4 @@ $(function() {
 4. Optional: Style it with CSS
 Use the CSS classes *github-timeline-header* to style the header text (defaults to "lucidia grande" 14px bolder black) and *github-timeline-event-text:link* to style the text (defaults to "lucidia grande" 12px black).
 
-See the "github-timeline-widget.css":"https://github.com/alindeman/github-timeline-widget/blob/master/github-timeline-widget.css" file for all classes.
+See the "github-timeline-widget.css":https://github.com/alindeman/github-timeline-widget/blob/master/github-timeline-widget.css file for all classes.
