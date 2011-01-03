@@ -1,7 +1,22 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
     <title>GitHub Timeline Widget Demonstration</title>
+
+    <style type="text/css">
+      label {
+        font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif;
+        font-size: 12px;
+        font-weight: bolder;
+      }
+
+      #installation-instructions {
+        font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif;
+        font-size: 11px;
+      }
+    </style>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://github.com/alindeman/github-timeline-widget/raw/stable/github-timeline-widget.js"></script>
@@ -23,11 +38,15 @@
   </head>
   <body>
     <form id="github-username-form" action="#">
-      <label for="github-username-field">GitHub Username</label>
+      <label for="github-username-field">GitHub Username:</label>
       <input type="text" name="github-username-field" id="github-username-field"/>
 
       <input type="submit" value="Show Widget">
     </form>
+
+    <p id="installation-instructions">
+      Want to add the widget to your website?  <a href="https://github.com/alindeman/github-timeline-widget">Instructions here!</a>
+    </p>
 
     <hr/>
 
