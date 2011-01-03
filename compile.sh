@@ -1,3 +1,3 @@
 #!/bin/sh
 
-coffee --print --join --compile src/*.coffee > github-timeline-widget.js
+coffee --bare --print --join --compile src/*.coffee > github-timeline-widget.js

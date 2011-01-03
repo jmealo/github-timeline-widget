@@ -1,4 +1,3 @@
-$ = jQuery
 class GitHubTimelineApi
   # Adds <strong> tags around a string
   _strongify: (string) ->
@@ -148,5 +147,5 @@ class GitHubTimelineApi
   # Calls the callback function passing an array with structure:
   # [ [url_0, icon_url_0, timestamp_0, text_0], ..., [url_n, icon_url_n, timestamp_n, text_n] ]
   getTimelineForUser: (user, callback) ->
-    $.ajaxSetup { cache: true }
-    $.getJSON 'https://github.com/' + user + '.json?callback=?', (data) => this._parseGitHubTimeline(data, callback)
+    jQuery.ajaxSetup { cache: true }
+    jQuery.getJSON 'https://github.com/' + user + '.json?callback=?', (data) => this._parseGitHubTimeline(data, callback)

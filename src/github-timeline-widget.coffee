@@ -1,5 +1,4 @@
-$ = jQuery
-$.fn.githubTimelineWidget = (options) ->
+jQuery.fn.githubTimelineWidget = (options) ->
   defaults =
     username: 'timeline'
     limit: 5
@@ -13,7 +12,7 @@ $.fn.githubTimelineWidget = (options) ->
 
   # Load stylesheet
   if script_path?
-    $('<link/>')
+    jQuery('<link/>')
     .attr('rel', 'stylesheet')
     .attr('type', 'text/css')
     .attr('href', script_path + 'github-timeline-widget.css')
@@ -21,20 +20,20 @@ $.fn.githubTimelineWidget = (options) ->
 
   this.each ->
     it = this
-    $this = $(this)
+    $this = jQuery(this)
 
     # Merge default options
-    it.opts = $.extend {}, defaults, options
+    it.opts = jQuery.extend {}, defaults, options
 
     # Add heading
-    $('<a>')
+    jQuery('<a>')
       .attr('class', 'github-timeline-header')
       .attr('href', "https://github.com/#{it.opts.username}")
       .text("#{it.opts.username} on GitHub")
       .appendTo($this)
 
     # Add list
-    list = $('<ul>')
+    list = jQuery('<ul>')
       .attr('class', 'github-timeline-events')
       .appendTo($this)
 
@@ -49,21 +48,21 @@ $.fn.githubTimelineWidget = (options) ->
         # Splat out components
         [url, icon_url, timestamp, text] = event
         
-        list_item = $('<li>')
+        list_item = jQuery('<li>')
           .attr('class', 'github-timeline-event')
           .appendTo(list)
 
-        event_link = $('<a>')
+        event_link = jQuery('<a>')
           .attr('href', url)
 
         if icon_url
-          $('<img>')
+          jQuery('<img>')
             .attr('src', icon_url)
             .appendTo(list_item)
-            .wrap($('<div>').attr('class', 'github-timeline-event-icon'))
+            .wrap(jQuery('<div>').attr('class', 'github-timeline-event-icon'))
             .wrap(event_link)
 
-        div_text = $('<div>')
+        div_text = jQuery('<div>')
           .attr('class', 'github-timeline-event-text')
           .html(text)
           .appendTo(list_item)
@@ -72,13 +71,13 @@ $.fn.githubTimelineWidget = (options) ->
         if timestamp?.getTime() > 0
           timestamp_ago = api.formatAsTimeAgo timestamp
           if timestamp_ago
-            $('<div>')
+            jQuery('<div>')
               .attr('class', 'github-timeline-event-time')
               .text(timestamp_ago)
               .appendTo(div_text)
 
       # Footer (bylines)
-      $('<a>')
+      jQuery('<a>')
         .attr('class', 'github-timeline-source-link')
         .attr('href', 'https://github.com/alindeman/github-timeline-widget')
         .text('GitHub Timeline Widget')
