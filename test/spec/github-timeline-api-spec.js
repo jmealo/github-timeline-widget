@@ -57,10 +57,40 @@ describe('GitHubTimelineApi', function() {
       expect(api.formatAsTimeAgo(new Date(unixTimeNow - 110000))).toEqual("1 minute ago");
     });
 
-    it ("should return 'X minutes ago' for times great than 120 seconds but less than 1 hour", function() {
+    it("should return 'X minutes ago' for times greater than 120 seconds but less than 1 hour", function() {
       expect(api.formatAsTimeAgo(new Date(unixTimeNow - 150000))).toEqual("2 minutes ago");
       expect(api.formatAsTimeAgo(new Date(unixTimeNow - 2045000))).toEqual("34 minutes ago");
       expect(api.formatAsTimeAgo(new Date(unixTimeNow - 3305000))).toEqual("55 minutes ago");
+    });
+
+    it("should return '1 hour ago' for times greater than 1 hour but less than 2 hours", function() {
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 3660000))).toEqual("1 hour ago");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 5340000))).toEqual("1 hour ago");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 6900000))).toEqual("1 hour ago");
+    });
+    
+    it("should return 'X hours ago' for times greater than 2 hour but less than 1 day", function() {
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 10860000))).toEqual("3 hours ago");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 28860000))).toEqual("8 hours ago");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 54060000))).toEqual("15 hours ago");
+    });
+    
+    it("should return 'Yesterday' for times greater than 1 day but less than 2 days", function() {
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 90000000))).toEqual("Yesterday");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 129600000))).toEqual("Yesterday");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 169200000))).toEqual("Yesterday");
+    });
+    
+    it("should return 'X days ago' for times greater than 2 days but less than 1 week", function() {
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 172860000))).toEqual("2 days ago");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 345606000))).toEqual("4 days ago");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 518406000))).toEqual("6 days ago");
+    });
+    
+    it("should return 'X weeks ago' for times greater than 7 days", function() {
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 691206000))).toEqual("2 weeks ago");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 2419206000))).toEqual("4 weeks ago");
+      expect(api.formatAsTimeAgo(new Date(unixTimeNow - 7862406000))).toEqual("13 weeks ago");
     });
   });
 });
