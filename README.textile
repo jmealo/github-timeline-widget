@@ -28,4 +28,5 @@ $(function() {
 </script></code></pre>
 
 4. Optional: Style it with CSS
-Feel free to tweak how it look using CSS.  I have attempted to add *class* attributes to all elements that you may want to style.
+Use the CSS classes *github-timeline-header* to style the header text (defaults to "lucidia grande" 14px bolder black) and *github-timeline-event-text:link* to style the text (defaults to "lucidia grande" 12px black).
+
