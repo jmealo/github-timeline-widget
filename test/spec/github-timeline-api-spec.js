@@ -14,7 +14,7 @@ describe('GitHubTimelineApi', function() {
     };
 
     spyOn(jQuery, 'ajaxSetup');
-    spyOn(jQuery, 'getJSON');
+    spyOn(jQuery, 'getJSON').andCallThrough();
 
     api = new GitHubTimelineApi(); 
   });
@@ -23,10 +23,19 @@ describe('GitHubTimelineApi', function() {
     it("should make an AJAX request for the correct URL", function() {
       jsonResponse = []
 
-      api.getTimelineForUser('alindeman', function() { });
+      api.getTimelineForUser('alindeman', function(events) { });
 
       expect(jQuery.ajaxSetup).toHaveBeenCalledWith({cache: true});
       expect(jQuery.getJSON.mostRecentCall.args[0]).toEqual('https://github.com/alindeman.json?callback=?');
+    });
+
+    it ("should call the callback function", function() {
+      jsonResponse = []
+
+      callbackSpy = jasmine.createSpy();
+      api.getTimelineForUser('alindeman', callbackSpy);
+
+      expect(callbackSpy).toHaveBeenCalled();
     });
   });
 });
