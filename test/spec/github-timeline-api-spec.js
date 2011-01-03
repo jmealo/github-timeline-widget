@@ -3,7 +3,10 @@ describe('GitHubTimelineApi', function() {
   var api;
 
   // Response sent by mock $.getJSON call
-  var jsonResponse = null;
+  var jsonResponse = [];
+
+  // Unix time at the start of the current test
+  var unixTimeNow;
 
   // Setup mock objects
   beforeEach(function() {
@@ -16,13 +19,13 @@ describe('GitHubTimelineApi', function() {
     spyOn(jQuery, 'ajaxSetup');
     spyOn(jQuery, 'getJSON').andCallThrough();
 
-    api = new GitHubTimelineApi(); 
+    api = new GitHubTimelineApi();
+
+    unixTimeNow = new Date().valueOf();
   });
   
   describe("getTimelineForUser", function() {
     it("should make an AJAX request for the correct URL", function() {
-      jsonResponse = []
-
       api.getTimelineForUser('alindeman', function(events) { });
 
       expect(jQuery.ajaxSetup).toHaveBeenCalledWith({cache: true});
@@ -30,21 +33,34 @@ describe('GitHubTimelineApi', function() {
     });
 
     it("should call the callback function", function() {
-      jsonResponse = []
-
       callbackSpy = jasmine.createSpy();
       api.getTimelineForUser('alindeman', callbackSpy);
 
       expect(callbackSpy).toHaveBeenCalled();
     });
+
+    describe("CreateEvent", function() {
+      it("parses a repository create event", function() {
+        timestamp = truncateTimeToSecond(new Date(unixTimeNow - 30));
+        jsonResponse.push({url: 'https://github.com/foo/bar',
+          created_at: timestamp.toString(),
+          repository: {owner: 'alindeman', name: 'github-timeline-widget'},
+          type: 'CreateEvent',
+          payload: {object: 'repository'}});
+
+        callbackSpy = jasmine.createSpy();
+        api.getTimelineForUser('alindeman', callbackSpy);
+
+        expect(callbackSpy).toHaveBeenCalledWith(
+          [['https://github.com/foo/bar',
+            'https://github.com/images/modules/dashboard/news/create.png',
+            timestamp.valueOf(),
+            'created repo <strong>alindeman/github-timeline-widget</strong>']]);
+      });
+    });
   });
 
   describe("formatAsTimeAgo", function() {
-    var unixTimeNow;
-    beforeEach(function() {
-      unixTimeNow = new Date().valueOf();
-    });
-
     it("should return 'just now' for times less than 60 second ago", function() {
       expect(api.formatAsTimeAgo(new Date(unixTimeNow - 30000))).toEqual("just now");
       expect(api.formatAsTimeAgo(new Date(unixTimeNow - 55000))).toEqual("just now");

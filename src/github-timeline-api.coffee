@@ -41,7 +41,7 @@ class GitHubTimelineApi
     url = url.replace 'github.com//', 'github.com/'
 
     # Timestamp, if it exists, is event.created_at
-    timestamp = new Date (event.created_at if event.created_at?) || 0
+    timestamp = new Date((event.created_at if event.created_at?) || 0).valueOf()
 
     # Pull out repository if it exists
     if event.repository?
