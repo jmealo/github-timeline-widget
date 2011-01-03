@@ -7,10 +7,10 @@ class GitHubTimelineApi
   # Converts the date into a human readable "time ago" form
   # e.g., "just now" or "Yesterday"
   formatAsTimeAgo: (date) ->
-    diff = ((new DateTime).getTime - date.getTime) / 1000
+    diff = ((new Date).getTime() - date.getTime()) / 1000
     day_diff = Math.floor diff / 86400
 
-    if isNaN day_diff || day_diff < 0
+    if (isNaN day_diff) || (day_diff < 0)
       return null
     
     if day_diff == 0

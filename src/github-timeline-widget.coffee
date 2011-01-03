@@ -69,8 +69,8 @@ $.fn.githubTimelineWidget = (options) ->
           .appendTo(list_item)
           .wrapInner(event_link)
 
-        if timestamp.valueOf > 0
-          timestamp_ago = api.formatAtTimeAgo timestamp
+        if timestamp?.getTime() > 0
+          timestamp_ago = api.formatAsTimeAgo timestamp
           if timestamp_ago
             $('<div>')
               .attr('class', 'github-timeline-event-time')
