@@ -120,8 +120,8 @@ class GitHubTimelineApi
             text = "deleted branch #{this._strongify event.payload.ref} at #{repository}"
           # TODO: More?
       when 'PublicEvent'
-        # TODO: What is this?
-        text = null
+        icon_url = 'https://github.com/images/modules/dashboard/news/public.png'
+        text = "open sourced #{repository}"
       when 'DownloadEvent'
         # TODO: What is this?
         text = null

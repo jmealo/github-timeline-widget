@@ -95,6 +95,25 @@ describe('GitHubTimelineApi', function() {
             'created branch <strong>awesome-branch</strong> at <strong>alindeman/github-timeline-widget</strong>']]);
       });
     });
+
+    describe("PublicEvent", function() {
+      it("parses an open sourced event", function() {
+        timestamp = truncateTimeToSecond(new Date(unixTimeNow - 30));
+        jsonResponse.push({url: 'https://github.com/foo/bar',
+          created_at: timestamp.toString(),
+          repository: {owner: 'alindeman', name: 'github-timeline-widget'},
+          type: 'PublicEvent'});
+
+        callbackSpy = jasmine.createSpy();
+        api.getTimelineForUser('alindeman', callbackSpy);
+
+        expect(callbackSpy).toHaveBeenCalledWith(
+          [['https://github.com/foo/bar',
+            'https://github.com/images/modules/dashboard/news/public.png',
+            timestamp.valueOf(),
+            'open sourced <strong>alindeman/github-timeline-widget</strong>']]);
+      });
+    });
   });
 
   describe("formatAsTimeAgo", function() {
