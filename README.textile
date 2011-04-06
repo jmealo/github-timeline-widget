@@ -23,7 +23,8 @@ h3. Steps To Add To Your Website
 $(function() {
   var options = {
     'username': '##GITHUB USERNAME##',
-    'limit': 5
+    'limit': 5,
+    'user_id': true // set to false to exclude (user #)
   };
   $("#github-timeline-widget").githubTimelineWidget(options);
 });

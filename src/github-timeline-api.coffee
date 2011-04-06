@@ -149,3 +149,10 @@ class GitHubTimelineApi
   getTimelineForUser: (user, callback) ->
     jQuery.ajaxSetup { cache: true }
     jQuery.getJSON 'https://github.com/' + user + '.json?callback=?', (data) => this._parseGitHubTimeline(data, callback)
+
+  # Fetches the GitHub ID for the specified user
+  # Calls the callback function passing the user ID as the first argument
+  getUserIdForUser: (user, callback) ->
+    jQuery.ajaxSetup { cache: true }
+    jQuery.getJSON 'https://github.com/api/v2/json/user/show/' + user + '?callback=?', (data) =>
+      callback data.user.id

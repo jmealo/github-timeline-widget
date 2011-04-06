@@ -2,6 +2,7 @@ jQuery.fn.githubTimelineWidget = (options) ->
   defaults =
     username: 'timeline'
     limit: 5
+    user_id: true
 
   # Determine where the stylesheet is located (relative to the location of this script)
   scripts = document.getElementsByTagName 'script'
@@ -82,3 +83,14 @@ jQuery.fn.githubTimelineWidget = (options) ->
         .attr('href', 'https://github.com/alindeman/github-timeline-widget')
         .text('GitHub Timeline Widget')
         .appendTo($this)
+
+    # Add user ID
+    if it.opts.user_id
+      api.getUserIdForUser it.opts.username, (user_id) ->
+        jQuery('<br/>')
+          .appendTo('.github-timeline-header')
+
+        jQuery('<span>')
+          .attr('class', 'github-timeline-header-user-id')
+          .text("(user ##{user_id})")
+          .appendTo('.github-timeline-header')
