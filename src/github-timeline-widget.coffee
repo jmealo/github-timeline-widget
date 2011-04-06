@@ -32,13 +32,6 @@ jQuery.fn.githubTimelineWidget = (options) ->
       .text("#{it.opts.username} on GitHub")
       .appendTo($this)
 
-    # Add user ID
-    api.getUserIdForUser it.opts.username, (user_id) ->
-      jQuery('<span>')
-        .attr('class', 'github-timeline-header-user-id')
-        .text("(user ##{user_id})")
-        .appendTo('.github-timeline-header')
-
     # Add list
     list = jQuery('<ul>')
       .attr('class', 'github-timeline-events')
@@ -89,3 +82,10 @@ jQuery.fn.githubTimelineWidget = (options) ->
         .attr('href', 'https://github.com/alindeman/github-timeline-widget')
         .text('GitHub Timeline Widget')
         .appendTo($this)
+
+    # Add user ID
+    api.getUserIdForUser it.opts.username, (user_id) ->
+      jQuery('<span>')
+        .attr('class', 'github-timeline-header-user-id')
+        .text("(user ##{user_id})")
+        .appendTo('.github-timeline-header')
