@@ -85,6 +85,9 @@ jQuery.fn.githubTimelineWidget = (options) ->
 
     # Add user ID
     api.getUserIdForUser it.opts.username, (user_id) ->
+      jQuery('<br/>')
+        .appendTo('.github-timeline-header')
+
       jQuery('<span>')
         .attr('class', 'github-timeline-header-user-id')
         .text("(user ##{user_id})")
