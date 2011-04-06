@@ -7,7 +7,7 @@ GitHub Timeline Widget is a *jQuery plugin* that displays your *GitHub activity*
 It's a work in progress, but feel free to try it out and/or give me feedback.
 
 h3. Screenshot
-!https://img.skitch.com/20110102-ftt3nhikwxibr2a9i6a4gff6xu.png(Screenshot of GitHub Timeline Widget)!
+!https://img.skitch.com/20110406-c5cxutc33ht7ymampqej1ukfm1.png(Screenshot of GitHub Timeline Widget)!
 
 h3. Steps To Add To Your Website
 
