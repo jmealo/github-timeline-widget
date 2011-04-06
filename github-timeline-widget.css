@@ -6,6 +6,10 @@
   text-decoration: none;
 }
 
+.github-timeline-header-user-id {
+  font-size: 12px;
+}
+
 .github-timeline-events {
   list-style: none;
   padding: 0px;
