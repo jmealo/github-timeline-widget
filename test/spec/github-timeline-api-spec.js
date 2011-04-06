@@ -25,6 +25,41 @@ describe('GitHubTimelineApi', function() {
     jsonResponse = [];
   });
 
+  describe("getUserIdForUser", function() {
+    beforeEach(function() {
+      jsonResponse = {"user":
+        {"gravatar_id":"3da9aebb918d0d1b12d66fcca93c289d",
+         "company":"Highgroove Studios",
+         "name":"Andy Lindeman",
+         "created_at":"2010/09/11 07:25:10 -0700",
+         "location":"Atlanta, GA",
+         "public_repo_count":20,
+         "public_gist_count":25,
+         "blog":"http://www.andylindeman.com/",
+         "following_count":11,
+         "id":395621,
+         "type":"User",
+         "permission":null,
+         "followers_count":17,
+         "login":"alindeman",
+         "email":null}};
+    });
+
+    it("should make an AJAX request for the correct URL", function() {
+      api.getUserIdForUser('alindeman', function(id) { });
+
+      expect(jQuery.ajaxSetup).toHaveBeenCalledWith({cache: true});
+      expect(jQuery.getJSON.mostRecentCall.args[0]).toEqual('https://github.com/api/v2/json/user/show/alindeman?callback=?');
+    });
+
+    it("should call the callback function", function() {
+      callbackSpy = jasmine.createSpy();
+      api.getUserIdForUser('alindeman', callbackSpy);
+
+      expect(callbackSpy).toHaveBeenCalledWith(395621);
+    });
+  });
+
   describe("getTimelineForUser", function() {
     it("should make an AJAX request for the correct URL", function() {
       api.getTimelineForUser('alindeman', function(events) { });
