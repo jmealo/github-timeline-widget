@@ -7,7 +7,7 @@ GitHub Timeline Widget is a *jQuery plugin* that displays your *GitHub activity*
 This fork uses the GitHub font as described in the latest "GitHub Style Guide":https://github.com/styleguide/css/7.0.
 
 h3. Screenshot
-!https://imgur.com/hWBTD(Screenshot of GitHub Timeline Widget)!
+!https://github.com/jmealo/github-timeline-widget/blob/master/preview.png(Screenshot of GitHub Timeline Widget)!
 
 h3. Steps To Add To Your Website
 
@@ -18,7 +18,7 @@ h3. Steps To Add To Your Website
 <pre><code><div id="github-timeline-widget"></div></code></pre>
 
 3. Include the following code snippet, substituting _##GITHUB USERNAME##_ for your GitHub username:
-<pre><code><script type="text/javascript" src="://github.com/jmealo/github-timeline-widget/blob/master/github-timeline-widget.js"></script>
+<pre><code><script type="text/javascript" src="://github.com/jmealo/github-timeline-widget/master/github-timeline-widget.min.js"></script>
 <script type="text/javascript">
 $(function() {
   var options = {
