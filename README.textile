@@ -1,0 +1,39 @@
+h2. GitHub Timeline Widget
+
+GitHub Timeline Widget is a *jQuery plugin* that displays your *GitHub activity*.
+
+*Live Demo:* "http://jeffreymealo.com/":http://jeffreymealo.com/
+
+This fork uses the GitHub font as described in the latest "GitHub Style Guide":https://github.com/styleguide/css/7.0.
+
+h3. Screenshot
+!https://imgur.com/hWBTD(Screenshot of GitHub Timeline Widget)!
+
+h3. Steps To Add To Your Website
+
+1. Include jQuery in your page.  You can easily include the one from Google Libraries API:
+<pre><code><script type="text/javascript" src="://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script></code></pre>
+
+2. Create a &lt;div&gt; element on your page to hold the widget:
+<pre><code><div id="github-timeline-widget"></div></code></pre>
+
+3. Include the following code snippet, substituting _##GITHUB USERNAME##_ for your GitHub username:
+<pre><code><script type="text/javascript" src="://github.com/jmealo/github-timeline-widget/blob/master/github-timeline-widget.js"></script>
+<script type="text/javascript">
+$(function() {
+  var options = {
+    username: '##GITHUB USERNAME##',
+    limit: 5,
+    user_id: true // set to false to exclude (user #)
+    humble : true // set to false to show link to this project
+    fadeIn: true // set to false to disable fadeIn
+    header: 'octocat' //set to false to disable header entirely, set to false to not show hide octocat
+  };
+  $("#github-timeline-widget").githubTimelineWidget(options);
+});
+</script></code></pre>
+
+4. Optional: Style it with CSS
+Use the CSS classes *github-timeline-header* to style the header text (defaults to "lucidia grande" 14px bolder black) and *github-timeline-event-text:link* to style the text (defaults to "lucidia grande" 12px black).
+
+See the "github-timeline-widget.css":https://github.com/jmealo/github-timeline-widget/blob/master/github-timeline-widget.css file for all classes.

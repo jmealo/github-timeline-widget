@@ -1,0 +1,297 @@
+.github-timeline-header {
+    font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif;
+    font-size: 14px;
+    color: #000000;
+    font-weight: bolder;
+    text-decoration: none;
+    line-height: 1;
+}
+.github-timeline-header-user-id { font-size: 12px }
+.github-timeline-events {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.github-timeline-event {
+    clear: both;
+    margin-bottom: 10px;
+}
+.github-timeline-event-icon {
+    display: block;
+    float: left;
+}
+
+.github-timeline-event-icon img { border: 0px }
+.github-timeline-event-text {
+    font-family: "lucida grande", lucida, tahoma, helvetica, arial, sans-serif;
+    font-size: 12px;
+    display: block;
+    margin-left: 30px;
+}
+.github-timeline-event-text a {
+    color: #000000;
+    text-decoration: none;
+}
+.github-timeline-event-text strong { font-weight: bolder }
+.github-timeline-event-time { font-size: 10px }
+.github-timeline-source-link {
+    margin-left: 30px;
+    font-size: 10px;
+    text-decoration: none;
+    color: #000080;
+    display: block;
+}
+@font-face {
+    font-family: 'Octicons Regular';
+    src: url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-aff7e82aa2fb770134b35f61794e9ca11a6556cb.eot");
+    src: url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-aff7e82aa2fb770134b35f61794e9ca11a6556cb.eot#iefix") format("embedded-opentype"),url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-ea227ee7505207ebf76244f0ec61db5f93884daf.woff") format("woff"),url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-c2bdc8273713b8084bdde5f5a7067a82a86d0862.ttf") format("truetype"),url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-bb14942dccfc3f02e799635a23b3514e64a3886c.svg#newFontRegular") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+.mini-icon,
+.mega-icon {
+    font-family: 'Octicons Regular';
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.mini-icon {
+    width: 16px;
+    height: 16px;
+}
+.mini-icon:before,
+.mega-icon:before {
+    -moz-transition: color 0.15s ease-in 0;
+    -webkit-transition: color 0.15s ease-in 0;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.mini-icon-private-repo:before { content: "\f06a" }
+.mini-icon-public-repo:before { content: "\f001" }
+.mini-icon-repo-forked:before { content: "\f002" }
+.mini-icon-create:before { content: "\f003" }
+.mini-icon-delete:before { content: "\f004" }
+.mini-icon-push:before { content: "\f005" }
+.mini-icon-pull:before { content: "\f006" }
+.mini-icon-readme:before,
+.mini-icon-wiki:before { content: "\f007" }
+.mini-icon-octocat:before { content: "\f008" }
+.mini-icon-site-message:before,
+.mini-icon-blacktocat:before { content: "\f009" }
+.mini-icon-invertocat:before { content: "\f00a" }
+.mini-icon-download:before { content: "\f00b" }
+.mini-icon-upload:before { content: "\f00c" }
+.mini-icon-keyboard:before { content: "\f00d" }
+.mini-icon-gist:before { content: "\f00e" }
+.mini-icon-gist-private:before { content: "\f00f" }
+.mini-icon-code-file:before,
+.mini-icon-download-unknown:before { content: "\f010" }
+.mini-icon-download-text:before,
+.mini-icon-text-file:before { content: "\f011" }
+.mini-icon-download-media:before { content: "\f012" }
+.mini-icon-download-zip:before { content: "\f013" }
+.mini-icon-download-pdf:before { content: "\f014" }
+.mini-icon-download-tag:before,
+.mini-icon-tag:before { content: "\f015" }
+.mini-icon-directory:before { content: "\f016" }
+.mini-icon-submodule:before { content: "\f017" }
+.mini-icon-person:before { content: "\f018" }
+.mini-icon-team:before { content: "\f019" }
+.mini-icon-member-added:before { content: "\f01a" }
+.mini-icon-member-removed:before { content: "\f01b" }
+.mini-icon-follow:before { content: "\f01c" }
+.mini-icon-watching:before { content: "\f01d" }
+.mini-icon-unwatch:before { content: "\f01e" }
+.mini-icon-commit:before { content: "\f01f" }
+.mini-icon-public-fork:before,
+.mini-icon-fork:before,
+.mini-icon-branch:before,
+.mini-icon-tree:before { content: "\f020" }
+.mini-icon-private-fork:before { content: "\f021" }
+.mini-icon-pull-request:before { content: "\f022" }
+.mini-icon-merge:before { content: "\f023" }
+.mini-icon-public-mirror:before { content: "\f024" }
+.mini-icon-private-mirror:before { content: "\f025" }
+.mini-icon-issue-opened:before { content: "\f026" }
+.mini-icon-issue-reopened:before { content: "\f027" }
+.mini-icon-issue-closed:before { content: "\f028" }
+.mini-icon-issue-comment:before { content: "\f029" }
+.mini-icon-star:before { content: "\f02a" }
+.mini-icon-commit-comment:before { content: "\f02b" }
+.mini-icon-help:before { content: "\f02c" }
+.mini-icon-exclamation:before { content: "\f02d" }
+.mini-icon-search-input:before { content: "\f02e" }
+.mini-icon-advanced-search:before { content: "\f02f" }
+.mini-icon-notifications:before { content: "\f030" }
+.mini-icon-account-settings:before { content: "\f031" }
+.mini-icon-logout:before { content: "\f032" }
+.mini-icon-admin-tools:before { content: "\f033" }
+.mini-icon-feed:before { content: "\f034" }
+.mini-icon-apple:before { content: "\f036" }
+.mini-icon-windows:before {
+    content: "\f037";
+    content: "";
+    background: transparent url("https://a248.e.akamai.net/assets.github.com/assets/primer/buttons/windows-sprite-14706a596b41035afb0da5fd44ca3d4af89b7913.png") 0 0 no-repeat;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+.mini-icon-ios:before { content: "\f038" }
+.mini-icon-download-android:before,
+.mini-icon-android:before { content: "\f039" }
+.mini-icon-confirm:before { content: "\f03a" }
+.mini-icon-unread-note:before { content: "\f03b" }
+.mini-icon-read-note:before { content: "\f03c" }
+.mini-icon-arr-up:before { content: "\f03d" }
+.mini-icon-arr-right:before { content: "\f03e" }
+.mini-icon-arr-down:before { content: "\f03f" }
+.mini-icon-arr-left:before { content: "\f040" }
+.mini-icon-pin:before { content: "\f041" }
+.mini-icon-gift:before { content: "\f042" }
+.mini-icon-graph:before { content: "\f043" }
+.mini-icon-wrench:before { content: "\f044" }
+.mini-icon-credit-card:before { content: "\f045" }
+.mini-icon-time:before { content: "\f046" }
+.mini-icon-ruby:before { content: "\f047" }
+.mini-icon-podcast:before { content: "\f048" }
+.mini-icon-key:before { content: "\f049" }
+.mini-icon-force-push:before { content: "\f04a" }
+.mini-icon-sync:before { content: "\f04b" }
+.mini-icon-clone:before { content: "\f04c" }
+.mini-icon-diff:before { content: "\f04d" }
+.mini-icon-watchers:before { content: "\f04e" }
+.mini-icon-discussion:before { content: "\f04f" }
+.mini-icon-delete-note:before,
+.mini-icon-remove-close:before { content: "\f050" }
+.mini-icon-reply:before { content: "\f051" }
+.mini-icon-mail-status:before { content: "\f052" }
+.mini-icon-block:before { content: "\f053" }
+.mini-icon-tag-create:before { content: "\f054" }
+.mini-icon-tab-delete:before { content: "\f055" }
+.mini-icon-branch-create:before { content: "\f056" }
+.mini-icon-branch-delete:before { content: "\f057" }
+.mini-icon-edit:before { content: "\f058" }
+.mini-icon-info:before { content: "\f059" }
+.mini-icon-arr-collapsed:before { content: "\f05a" }
+.mini-icon-arr-expanded:before { content: "\f05b" }
+.mini-icon-link:before { content: "\f05c" }
+.mini-icon-add:before { content: "\f05d" }
+.mini-icon-reorder:before { content: "\f05e" }
+.mini-icon-code:before { content: "\f05f" }
+.mini-icon-location:before { content: "\f060" }
+.mini-icon-u-list:before { content: "\f061" }
+.mini-icon-o-list:before { content: "\f062" }
+.mini-icon-quotemark:before { content: "\f063" }
+.mini-icon-version:before { content: "\f064" }
+.mini-icon-brightness:before { content: "\f065" }
+.mini-icon-fullscreen:before { content: "\f066" }
+.mini-icon-normalscreen:before { content: "\f067" }
+.mini-icon-calendar:before { content: "\f068" }
+.mini-icon-beer:before { content: "\f069" }
+.mini-icon-secure:before,
+.mini-icon-lock:before { content: "\f06a" }
+.mini-icon-added:before { content: "\f06b" }
+.mini-icon-removed:before { content: "\f06c" }
+.mini-icon-modified:before { content: "\f06d" }
+.mini-icon-moved:before,
+.mini-icon-renamed:before { content: "\f06e" }
+.mini-icon-add-comment:before { content: "\f06f" }
+.mini-icon-horizontal-rule:before { content: "\f070" }
+.mini-icon-arr-right-mini:before { content: "\f071" }
+.mini-icon-jump-down:before { content: "\f072" }
+.mini-icon-jump-up:before { content: "\f073" }
+.mini-icon-reference:before { content: "\f074" }
+.mini-icon-milestone:before { content: "\f075" }
+.mini-icon-save-document:before { content: "\f076" }
+.mini-icon-megaphone:before { content: "\f077" }
+.mini-icon-chevron:before { content: "\f078" }
+.mini-icon-gist-forked:before { content: "\f079" }
+.mini-icon-gist-add:before { content: "\f07a" }
+.mini-icon-bookmark:before { content: "\f07b" }
+.mini-icon-filters:before { content: "\f07c" }
+.mini-icon-dashboard:before { content: "\f07d" }
+.mini-icon-history:before { content: "\f07e" }
+.mini-icon-external-link:before { content: "\f07f" }
+.mini-icon-mute:before { content: "\f080" }
+.mini-icon-x:before { content: "\f081" }
+.mini-icon-add-star:before { content: "\f082" }
+.mini-icon-remove-star:before { content: "\f083" }
+.mini-icon-circle-slash:before { content: "\f084" }
+.mini-icon-pulse:before { content: "\f085" }
+
+.mega-icon-octocat:before { content: "\f208  " }
+
+.mini-icon,.mega-icon {
+  font-family:'Octicons Regular';
+  font-weight:normal;
+  font-style:normal;
+  display:inline-block;
+  text-decoration:inherit;
+  line-height:1;
+  -webkit-font-smoothing:antialiased;
+  line-height:1;
+  text-decoration:none
+}
+
+.mini-icon {
+  width:16px;
+  height:16px;
+  padding:3px;
+  color:#fff;
+  color:rgba(255,255,255,0.9);
+  text-shadow:-1px -1px 0 rgba(0,0,0,0.2);
+  background:#aaa;
+  border-radius:2px
+}
+
+.mini-icon-push {
+  background:#7552a1
+}
+.mini-icon-create {
+  background:#7552a1
+}
+.mini-icon-fork {
+  background:#ad5310
+}
+.mini-icon-star {
+  background:#156f9e
+}
+.mini-icon-site-message {
+  background:#000
+}
+.mini-icon-follow {
+  background:#156f9e
+}
+.mini-icon-issue-opened {
+  background:#489D00
+}
+.mini-icon-issue-closed {
+  background:#489D00
+}
+.mini-icon-issue-comment {
+  background:#489D00
+}
+.mini-icon-pull-request {
+  background:#9e157c
+}
+.mini-icon-wiki {
+  background:#a3a500
+}
+
+.mega-icon-octocat hr {
+    border: 0;
+    height: 1px;
+    background: -moz-linear-gradient(left center, transparent, black, transparent);
+    background: -webkit-gradient(linear, left center, right center,
+                                 color-stop(0, transparent),
+                                 color-stop(0.5, black),
+                                 color-stop(1, transparent));
+    margin-bottom: 10px;
+}
