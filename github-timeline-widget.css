@@ -43,8 +43,8 @@
 }
 @font-face {
     font-family: 'Octicons Regular';
-    src: url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-aff7e82aa2fb770134b35f61794e9ca11a6556cb.eot");
-    src: url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-aff7e82aa2fb770134b35f61794e9ca11a6556cb.eot#iefix") format("embedded-opentype"),url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-ea227ee7505207ebf76244f0ec61db5f93884daf.woff") format("woff"),url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-c2bdc8273713b8084bdde5f5a7067a82a86d0862.ttf") format("truetype"),url("https://a248.e.akamai.net/assets.github.com/assets/octicons/octicons-regular-webfont-bb14942dccfc3f02e799635a23b3514e64a3886c.svg#newFontRegular") format("svg");
+    src: url("http://d2jo014ebi2mlj.cloudfront.net/inc/octicons-regular-webfont-aff7e82aa2fb770134b35f61794e9ca11a6556cb.eot");
+    src: url("http://d2jo014ebi2mlj.cloudfront.net/inc/octicons-regular-webfont-aff7e82aa2fb770134b35f61794e9ca11a6556cb.eot#iefix") format("embedded-opentype"),url("http://d2jo014ebi2mlj.cloudfront.net/inc/octicons-regular-webfont-ea227ee7505207ebf76244f0ec61db5f93884daf.woff") format("woff"),url("http://d2jo014ebi2mlj.cloudfront.net/inc/octicons-regular-webfont-c2bdc8273713b8084bdde5f5a7067a82a86d0862.ttf") format("truetype"),url("http://d2jo014ebi2mlj.cloudfront.net/inc/octicons-regular-webfont-bb14942dccfc3f02e799635a23b3514e64a3886c.svg#newFontRegular") format("svg");
     font-weight: normal;
     font-style: normal;
 }
