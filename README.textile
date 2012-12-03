@@ -23,6 +23,7 @@ h3. Steps To Add To Your Website
 3. Include the following code snippet:
 <pre><code><script type="text/javascript" src="github-timeline-widget.min.js"></script>
 <script type="text/javascript">
+//Call this after the DOM is loaded (see note following snippet)
   githubTimeline({
     username: '<YOUR GITHUB USERNAME!>',
     limit: 5,
