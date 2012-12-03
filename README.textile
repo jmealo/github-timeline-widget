@@ -3,7 +3,7 @@ h2. GitHub Timeline Widget
 The GitHub Timeline Widget allows you to embed your *GitHub activity* on an external website. It's Vanilla JS and doesn't require any libraries.
 
 The size of the JavaScript and CSS stylesheet are:
-*Minified: 8.86KB, Minified & GZipped:3.95KB*
+*Minified: 9.11KB, Minified & GZipped: 4.06KB*
 
 *Live Demo:* "http://jeffreymealo.com/":http://jeffreymealo.com/
 
