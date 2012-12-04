@@ -7,7 +7,7 @@ The size of the JavaScript and CSS stylesheet are:
 
 *Live Demo:* "http://jeffreymealo.com/":http://jeffreymealo.com/
 
-The widget uses GitHub font as described in the latest "GitHub Style Guide":https://github.com/styleguide/css/7.0.
+The widget uses the GitHub font as described in the latest "GitHub Style Guide":https://github.com/styleguide/css/7.0.
 
 h3. Screenshot
 !https://raw.github.com/jmealo/github-timeline-widget/master/preview.png(Screenshot of GitHub Timeline Widget)!
