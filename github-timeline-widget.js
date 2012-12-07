@@ -1,17 +1,22 @@
 function GitHubTimeline(options) {
-    var defaults = {username:"timeline", limit:5, header:"octocat"},
-        username = options.username || "timeline",
+    var username = options.username || "timeline",
         limit = options.limit || 5,
         header = options.header || "octocat",
         $this = options.id || 'github-timeline-widget',
-        exclude = options.exclude || [];
+        exclude = options.exclude || [],
+        cb = options.callback || null;
 
+    //Make JSONP Request for GitHub Timeline
     var jsonp = document.createElement('script');
     jsonp.src = 'https://github.com/' + username + '.json?callback=parseGitHubTimeline';
+    //JSONP callbacks must be brought into global scope --- we will remove later
     if (typeof window.parseGitHubTimeline !== 'function') window.parseGitHubTimeline = parseGitHubTimeline;
     document.head.appendChild(jsonp);
 
-    $this = document.getElementById($this);
+    $this = document.getElementById($this); //$this refers to our target DIV
+
+    //convert excludes to lowercase for case-insensitive comparison -- do this once instead of per event
+    if(exclude.length > 0) for(var i = 0; i < exclude.length; i++) exclude[i] = exclude[i].toLowerCase();
 
     if (header) {
         var header_html = '<a class="github-timeline-header" href="' + "https://github.com/" + username + '">' + username + ' on GitHub <hr></a>';
@@ -26,36 +31,37 @@ function GitHubTimeline(options) {
     function parseTimelineEvents(events) {
         var event, icon_class, text, timestamp, timestamp_ago, url, innerHTML = [];
 
-        main_loop:
         for (var x = 0, event_len = events.length; x < event_len; x++) {
-            if (limit-- === 0) break main_loop;
+            if (limit-- === 0) break; //stop after event limit is reached
 
+            //no checking 'event' for expected parameters, we only pass proper events
             event = events[x],
-            url = event[0],
-            icon_class = event[1],
-            timestamp = event[2],
-            text = event[3],
-            timestamp_ago = formatAsTimeAgo(new Date() - timestamp, 'years', 'minutes', 1);
+                url = event[0],
+                icon_class = event[1],
+                timestamp = event[2],
+                text = event[3],
+                timestamp_ago = formatAsTimeAgo(new Date() - timestamp, 'years', 'minutes', 1);
 
-            for (var y = 0; y < 4; y++) if (!event[0]) break main_loop;
-
-            innerHTML.push('<li class="github-timeline-event"><a href="' + url
-                + '"><span class="github-timeline-event-icon mini-icon mini-icon-' + icon_class
-                + '"></span></a><div class="github-timeline-event-text"><a href="' + url + '">' + text
+            innerHTML.push('<li class="github-timeline-event"><a href="' + url + '">'
+                + '<span class="github-timeline-event-icon mini-icon mini-icon-' + icon_class + '">'
+                + '</span></a><div class="github-timeline-event-text"><a href="' + url + '">' + text
                 + '</strong></a><div class="github-timeline-event-time">' + timestamp_ago
                 + '</div></div></li>');
         }
 
         list.innerHTML = innerHTML.join("\n");
-        delete window.parseGitHubTimeline;
-        if (typeof options.cb === 'function') options.cb();
+
+        delete window.parseGitHubTimeline; //remove JSONP handler from global scope
+
+        if (typeof cb === 'function') cb(); //invoke callback if specified
     }
 
     function formatAsTimeAgo(ms) {
         var tc = [3.15569e7, 2629741, 604800, 86400, 3600, 60, 1],
             td = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
             ti = {year:0, month:1, week:2, day:3, hour:4, minute:5, second:6};
-        //ti avoids use of Array.indexOf for accepting shortest/longest args as strings
+        // HACK: older browser support/performance hack - ti avoids use of Array.indexOf for
+        // accepting shortest/longest args as strings
         base = 1000,
             time = ms / base,
             shortest = (arguments[2]) ? ti[arguments[2].replace(/s\b/gi, '')] : 6,
@@ -82,36 +88,136 @@ function GitHubTimeline(options) {
     }
 
     function parseGitHubEvent(event) {
-        var branch, icon_class, repository, text, timestamp, url, _ref;
-        url = (event.url != null ? event.url : void 0) || (((_ref = event.payload) != null ? _ref.url : void 0) != null ? event.payload.url : void 0) || "https://github.com";
-        url = url.replace("github.com//", "github.com/");
-        timestamp = new Date((event.created_at != null ? event.created_at : void 0) || 0).valueOf();
-        if (event.repository != null) {
-            repository = event.repository.owner + "/" + event.repository.name;
+        //check to see if event is malformed
+        for(var x = 0, req = ['payload', 'type', 'created_at']; x < 3; x++) {
+            if(!(req[x] in event) && event[req[x]] !== null) return [];
         }
 
-        var event_type = event.type.replace('Event', '');
+        var branch, icon_class, repository, text,
+            repository = ('repository' in event) ? event.repository.owner + "/" + event.repository.name : null,
+            url = ('url' in event) ? event.url : ('url' in _ref) ? _ref.url : 'https://github.com/',
+            timestamp = new Date(event.created_at),
+            _ref = event.payload,
+            event_type = event.type.replace('Event', '');
 
-        var et = {
-            Create:{t:{repository:['created repo', '$repo'], tag:['created tag', '$.ref', 'at', '$repo'], branch:['created branch', '$.ref', 'at', '$repo']}},
-            ForkApply:{i:'merge', t:['merged to', '$repo']},
-            Fork:{i:'repo-forked', t:['forked ', '$repo']},
-            Watch:{i:{started:'watching', stopped:'unwatch'}, t:{ started:['started watching', '$repo'], stopped:['stopped watching', '$repo']}},
-            PullRequest:{i:{opened:'issue-opened', reopened:'issue-reopened', closed:'issue-closed'}, t:{opened:['opened issue on', '$repo'], reopened:['reopened issue on', '$repo'], closed:['closed issue on', '$repo']}},
-            Gist:{i:{update:'gist-add', fork:'gist-forked', create:'gist'}, t:{create:['created', '$.name'], update:['updated', '$.name'], fork:['forked', '$.name']}},
-            Gollum:{i:'wiki', t:{created:['created a wiki page on', '$repo'], edited:['edited a wiki page on', '$repo']}},
-            CommitComment:{i:'commit-comment', t:['commented on', '$repo']},
-            Delete:{i:'branch-delete', t:['deleted branch', '$.ref', 'at', '$repo']},
-            Public:{i:'public-mirror', t:['open sourced', '$repo']},
-            IssueComment:{i:'discussion', t:['commented on an issue at', '$repo']},
-            Member:{t:{added:['added' + '$.member', 'to', '$repo']}},
-            Push:{t:['pushed to', '$branch', 'at', '$repo'] },
-            Follow:{t:['started following', '$.target.login']}
+        url = url.replace("github.com//", "github.com/"); //fix broken URLs
+
+        //et contains the icon classes and text for each event type. There are two types of events:
+        //SIMPLE:
+        // eventName : {t : ['event','text','as',array'], i: eventIconClass}
+        //COMPLEX (events with CRUD):
+        // eventName: {t: create : ['create','event',text'], update: ['update','event','text']}
+        //=== Where: ===
+        //t = text (required)and is required, i is optional
+        //i = icon (optional)... if not specified the icon class is set to the event type
+        //=== Note: ===
+        //text is stored as an array to speed up substitutions and concatenation in generateText() [see below]
+        var et =
+        {
+            Create: {
+                t: {
+                    repository: ['created repo','$repo'],
+                    tag:        ['created tag','$.ref','at','$repo'],
+                    branch:     ['created branch','$.ref','at','$repo']
+                }
+            },
+
+            ForkApply: {
+                i: 'merge',
+                t: ['merged to','$repo']
+            },
+
+            Fork: {
+                i: 'repo-forked',
+                t: ['forked ','$repo']
+            },
+
+            Watch: {
+                i: {
+                    started: 'watching',
+                    stopped: 'unwatch'
+                },
+                t: {
+                    started: ['started watching','$repo'],
+                    stopped: ['stopped watching','$repo']
+                }
+            },
+
+            PullRequest: {
+                i: {
+                    opened:   'issue-opened',
+                    reopened: 'issue-reopened',
+                    closed:   'issue-closed'
+                },
+                t: {
+                    opened:   ['opened issue on','$repo'],
+                    reopened: ['reopened issue on','$repo'],
+                    closed:   ['closed issue on','$repo']
+                }
+            },
+
+            Gist: {
+                i: {
+                    update: 'gist-add',
+                    fork:   'gist-forked',
+                    create: 'gist'
+                },
+                t: {
+                    create: ['created','$.name'],
+                    update: ['updated','$.name'],
+                    fork:   ['forked','$.name'
+                    ]
+                }
+            },
+
+            Gollum: {
+                i: 'wiki',
+                t: {
+                    created: ['created a wiki page on','$repo'],
+                    edited:  ['edited a wiki page on','$repo']
+                }
+            },
+
+            CommitComment: {
+                i: 'commit-comment',
+                t: ['commented on','$repo']
+            },
+
+            Delete: {
+                i: 'branch-delete',
+                t: ['deleted branch','$.ref','at','$repo']
+            },
+
+            Public: {
+                i: 'public-mirror',
+                t: ['open sourced','$repo']
+            },
+
+            IssueComment: {
+                i: 'discussion',
+                t: ['commented on an issue at','$repo']
+            },
+
+            Member: {
+                t: {
+                    added: ['added$.member','to','$repo']
+                }
+            },
+
+            Push: {
+                t: ['pushed to','$branch','at','$repo']
+            },
+
+            Follow: {
+                t: ['started following','$.target.login']
+            }
         };
 
+        //These events appear identically, don't duplicate data:
         et.Issues = et.PullRequest;
         et.Wiki = et.Gollum;
 
+        //eti = icon; ett = text --- these default to the event_type unless otherwise specified
         var eti = et[event_type].i || event_type,
             ett = et[event_type].t || event_type;
 
@@ -136,13 +242,21 @@ function GitHubTimeline(options) {
         }
 
         if (typeof ett === 'object' && ett instanceof Array === false) {
-            text = generateText(ett[event.payload.ref_type] || ett[event.payload.action] || ett[event.payload.pages[0].action]);
+            //the following payload properties are used to differentiate CRUD specifiers for different actions
+            text = generateText( ('ref_type' in _ref) ? ett[_ref.ref_type]
+                : ('action' in _ref) ? ett[_ref.action]
+                : ('action' in _ref.pages[0]) ? ett[_ref.pages[0].action]
+                : null );
         } else {
             text = generateText(ett);
         }
 
-        if (text != null) {
-            for (var z = 0, exclude_len = exclude.length; z < exclude_len; z++) if (text.indexOf(exclude[z]) !== -1) return [];
+        if (text && icon_class && timestamp && url) {
+            //do not return events that contain any of the strings in the exclude array
+            var exclude_len = exclude.length, ltext = text.toLowerCase();
+            for (var z = 0; z < exclude_len; z++) {
+                if (ltext.indexOf(exclude[z]) !== -1) return [];
+            }
             return[url, icon_class, timestamp, text];
         } else {
             return [];
