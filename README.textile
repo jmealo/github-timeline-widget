@@ -3,7 +3,7 @@ h2. GitHub Timeline Widget
 The GitHub Timeline Widget allows you to embed your *GitHub activity* on an external website. It's Vanilla JS and doesn't require any libraries.
 
 The size of the JavaScript and CSS stylesheet are:
-*Minified: 9.11KB, Minified & GZipped: 4.06KB*
+*Minified: ~9KB, Minified & GZipped: ~4KB
 
 *Live Demo:* "http://jeffreymealo.com/":http://jeffreymealo.com/
 
@@ -24,25 +24,27 @@ h3. Steps To Add To Your Website
 <pre><code><script type="text/javascript" src="github-timeline-widget.min.js"></script>
 <script type="text/javascript">
 //Call this after the DOM is loaded (see note following snippet)
-  githubTimeline({
+  GitHubTimeline({
     username: '<YOUR GITHUB USERNAME!>',
     limit: 5,
     header: 'octocat',
     id: 'github-timeline-widget',
-    exclude: ['gist']
+    exclude: ['gist'],
+    callback: function () { //code to run once widget is inserted into DOM }
   });
 </script></code></pre>
 
 I don't include a Document Loaded/DOM Ready event to avoid duplicate code. Feel free to use your favorite JS library or try out the cross-browser example here: "http://javascript.info/tutorial/onload-ondomcontentloaded":http://javascript.info/tutorial/onload-ondomcontentloaded.
 
 *Options:*
-* username: GitHub username
-* limit: number of activities to show [default: 5]
-* header:
+* username: [string] GitHub username
+* limit: [number] number of activities to show [default: 5]
+* header: [string/bool]
 *# 'octocat': include octocat in header [default]
 *# true: excludes the octocat
 *# false: removes the header entirely
-* exclude: a case-sensitive array of strings --- activities that contain one of these strings will not appear in the widget
+* exclude: [array of strings] activities that contain one of these strings will not appear in the widget
+* callback: [function] called when the widget has been inserted into the DOM
 
 *Custom Styling:*
 Use the CSS classes *github-timeline-header* to style the header text (defaults to "lucidia grande" 14px bolder black) and *github-timeline-event-text:link* to style the text (defaults to "lucidia grande" 12px black).
