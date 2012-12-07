@@ -38,14 +38,14 @@ h3. Steps To Add To Your Website
 I don't include a Document Loaded/DOM Ready event to avoid duplicate code. Feel free to use your favorite JS library or try out the cross-browser example here: "http://javascript.info/tutorial/onload-ondomcontentloaded":http://javascript.info/tutorial/onload-ondomcontentloaded.
 
 *Options:*
-* username: [string] GitHub username
-* limit: [number] number of activities to show [default: 5]
-* header: [string/bool]
+* *username:* [string] GitHub username
+* *limit:* [number] number of activities to show [default: 5]
+* *header:* [string/bool]
 *# 'octocat': include octocat in header [default]
 *# true: excludes the octocat
 *# false: removes the header entirely
-* exclude: [array of strings] activities that contain one of these strings will not appear in the widget
-* callback: [function] called when the widget has been inserted into the DOM
+* *exclude:* [array of strings] activities that contain one of these strings will not appear in the widget
+* *callback:* [function] called when the widget has been inserted into the DOM
 
 *Custom Styling:*
 Use the CSS classes *github-timeline-header* to style the header text (defaults to "lucidia grande" 14px bolder black) and *github-timeline-event-text:link* to style the text (defaults to "lucidia grande" 12px black).
