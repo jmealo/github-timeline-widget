@@ -52,4 +52,4 @@ Use the CSS classes *github-timeline-header* to style the header text (defaults 
 
 See the "github-timeline-widget.css":https://github.com/jmealo/github-timeline-widget/blob/master/github-timeline-widget.css file for all classes.
 
-!https://d2weczhvl823v0.cloudfront.net/jmealo/github-timeline-widget/trend.png(Bitdeli Badge")!
+!https://d2weczhvl823v0.cloudfront.net/jmealo/github-timeline-widget/trend.png(Bitdeli Badge)!:https://bitdeli.com/free
