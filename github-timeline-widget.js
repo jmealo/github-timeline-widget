@@ -37,7 +37,7 @@ function GitHubTimeline(options) {
             //no checking 'event' for expected parameters, we only pass proper events
             event = events[x],
                 url = event[0],
-                icon_class = event[1],
+                icon_class = event[1].toLowerCase(),
                 timestamp = event[2],
                 text = event[3],
                 timestamp_ago = formatAsTimeAgo(new Date() - timestamp, 'years', 'minutes', 1);
@@ -79,6 +79,7 @@ function GitHubTimeline(options) {
                 time = time - (time_in_units * tc[x]);
                 if (depth === 1 && td[x] === 'day' && time_in_units === 1) return 'Yesterday';
                 if (depth === 1 && td[x] === 'week' && time_in_units === 1) return 'Last week';
+                if (depth === 1 && td[x] === 'month' && time_in_units === 1) return 'Last month';
                 ret_val.push(time_in_units);
                 ret_val.push(td[x] + ((ret_val[ret_val.length - 1] > 1) ? 's' : '') + ' ago');
             }
