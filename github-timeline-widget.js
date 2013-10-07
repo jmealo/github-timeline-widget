@@ -16,7 +16,7 @@ function GitHubTimeline(options) {
     $this = document.getElementById($this); //$this refers to our target DIV
 
     //convert excludes to lowercase for case-insensitive comparison -- do this once instead of per event
-    if(exclude.length > 0) for(var i = 0; i < exclude.length; i++) exclude[i] = exclude[i].toLowerCase();
+    if (exclude.length > 0) for (var i = 0; i < exclude.length; i++) exclude[i] = exclude[i].toLowerCase();
 
     if (header) {
         var header_html = '<a class="github-timeline-header" href="' + "https://github.com/" + username + '">' + username + ' on GitHub <hr></a>';
@@ -59,7 +59,7 @@ function GitHubTimeline(options) {
     function formatAsTimeAgo(ms) {
         var tc = [3.15569e7, 2629741, 604800, 86400, 3600, 60, 1],
             td = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
-            ti = {year:0, month:1, week:2, day:3, hour:4, minute:5, second:6};
+            ti = {year: 0, month: 1, week: 2, day: 3, hour: 4, minute: 5, second: 6};
         // HACK: older browser support/performance hack - ti avoids use of Array.indexOf for
         // accepting shortest/longest args as strings
         base = 1000,
@@ -78,6 +78,7 @@ function GitHubTimeline(options) {
                 depth++;
                 time = time - (time_in_units * tc[x]);
                 if (depth === 1 && td[x] === 'day' && time_in_units === 1) return 'Yesterday';
+                if (depth === 1 && td[x] === 'week' && time_in_units === 1) return 'Last week';
                 ret_val.push(time_in_units);
                 ret_val.push(td[x] + ((ret_val[ret_val.length - 1] > 1) ? 's' : '') + ' ago');
             }
@@ -89,8 +90,8 @@ function GitHubTimeline(options) {
 
     function parseGitHubEvent(event) {
         //check to see if event is malformed
-        for(var x = 0, req = ['payload', 'type', 'created_at']; x < 3; x++) {
-            if(!(req[x] in event) && event[req[x]] !== null) return [];
+        for (var x = 0, req = ['payload', 'type', 'created_at']; x < 3; x++) {
+            if (!(req[x] in event) && event[req[x]] !== null) return [];
         }
 
         var branch, icon_class, repository, text,
@@ -116,20 +117,20 @@ function GitHubTimeline(options) {
         {
             Create: {
                 t: {
-                    repository: ['created repo','$repo'],
-                    tag:        ['created tag','$.ref','at','$repo'],
-                    branch:     ['created branch','$.ref','at','$repo']
+                    repository: ['created repo', '$repo'],
+                    tag: ['created tag', '$.ref', 'at', '$repo'],
+                    branch: ['created branch', '$.ref', 'at', '$repo']
                 }
             },
 
             ForkApply: {
                 i: 'merge',
-                t: ['merged to','$repo']
+                t: ['merged to', '$repo']
             },
 
             Fork: {
                 i: 'repo-forked',
-                t: ['forked ','$repo']
+                t: ['forked ', '$repo']
             },
 
             Watch: {
@@ -138,34 +139,34 @@ function GitHubTimeline(options) {
                     stopped: 'unwatch'
                 },
                 t: {
-                    started: ['started watching','$repo'],
-                    stopped: ['stopped watching','$repo']
+                    started: ['started watching', '$repo'],
+                    stopped: ['stopped watching', '$repo']
                 }
             },
 
             PullRequest: {
                 i: {
-                    opened:   'issue-opened',
+                    opened: 'issue-opened',
                     reopened: 'issue-reopened',
-                    closed:   'issue-closed'
+                    closed: 'issue-closed'
                 },
                 t: {
-                    opened:   ['opened issue on','$repo'],
-                    reopened: ['reopened issue on','$repo'],
-                    closed:   ['closed issue on','$repo']
+                    opened: ['opened issue on', '$repo'],
+                    reopened: ['reopened issue on', '$repo'],
+                    closed: ['closed issue on', '$repo']
                 }
             },
 
             Gist: {
                 i: {
                     update: 'gist-add',
-                    fork:   'gist-forked',
+                    fork: 'gist-forked',
                     create: 'gist'
                 },
                 t: {
-                    create: ['created','$.name'],
-                    update: ['updated','$.name'],
-                    fork:   ['forked','$.name'
+                    create: ['created', '$.name'],
+                    update: ['updated', '$.name'],
+                    fork: ['forked', '$.name'
                     ]
                 }
             },
@@ -173,43 +174,43 @@ function GitHubTimeline(options) {
             Gollum: {
                 i: 'wiki',
                 t: {
-                    created: ['created a wiki page on','$repo'],
-                    edited:  ['edited a wiki page on','$repo']
+                    created: ['created a wiki page on', '$repo'],
+                    edited: ['edited a wiki page on', '$repo']
                 }
             },
 
             CommitComment: {
                 i: 'commit-comment',
-                t: ['commented on','$repo']
+                t: ['commented on', '$repo']
             },
 
             Delete: {
                 i: 'branch-delete',
-                t: ['deleted branch','$.ref','at','$repo']
+                t: ['deleted branch', '$.ref', 'at', '$repo']
             },
 
             Public: {
                 i: 'public-mirror',
-                t: ['open sourced','$repo']
+                t: ['open sourced', '$repo']
             },
 
             IssueComment: {
                 i: 'discussion',
-                t: ['commented on an issue at','$repo']
+                t: ['commented on an issue at', '$repo']
             },
 
             Member: {
                 t: {
-                    added: ['added$.member','to','$repo']
+                    added: ['added$.member', 'to', '$repo']
                 }
             },
 
             Push: {
-                t: ['pushed to','$branch','at','$repo']
+                t: ['pushed to', '$branch', 'at', '$repo']
             },
 
             Follow: {
-                t: ['started following','$.target.login']
+                t: ['started following', '$.target.login']
             }
         };
 
@@ -243,10 +244,10 @@ function GitHubTimeline(options) {
 
         if (typeof ett === 'object' && ett instanceof Array === false) {
             //the following payload properties are used to differentiate CRUD specifiers for different actions
-            text = generateText( ('ref_type' in _ref) ? ett[_ref.ref_type]
+            text = generateText(('ref_type' in _ref) ? ett[_ref.ref_type]
                 : ('action' in _ref) ? ett[_ref.action]
                 : ('action' in _ref.pages[0]) ? ett[_ref.pages[0].action]
-                : null );
+                : null);
         } else {
             text = generateText(ett);
         }
