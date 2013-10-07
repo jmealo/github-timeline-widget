@@ -41,9 +41,9 @@ I don't include a Document Loaded/DOM Ready event to avoid duplicate code. Feel 
 * *username:* [string] GitHub username
 * *limit:* [number] number of activities to show [default: 5]
 * *header:* [string/bool]
-*# 'octocat': include octocat in header [default]
-*# true: excludes the octocat
-*# false: removes the header entirely
+*# 'octocat': header with octocat and username [default]
+*# true: header (username only)
+*# false: no header
 * *exclude:* [array of strings] activities that contain one of these strings will not appear in the widget
 * *callback:* [function] called when the widget has been inserted into the DOM
 
