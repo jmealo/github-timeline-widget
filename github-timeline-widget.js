@@ -32,7 +32,7 @@ function GitHubTimeline(options) {
         var event, icon_class, text, timestamp, timestamp_ago, url, innerHTML = [];
 
         for (var x = 0, event_len = events.length; x < event_len; x++) {
-            if (limit-- === 0) break; //stop after event limit is reached
+            if(limit-- === 0) break; //stop after event limit is reached
 
             //no checking 'event' for expected parameters, we only pass proper events
             event = events[x],
@@ -59,10 +59,10 @@ function GitHubTimeline(options) {
     function formatAsTimeAgo(ms) {
         var tc = [3.15569e7, 2629741, 604800, 86400, 3600, 60, 1],
             td = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
-            ti = {year: 0, month: 1, week: 2, day: 3, hour: 4, minute: 5, second: 6};
-        // HACK: older browser support/performance hack - ti avoids use of Array.indexOf for
-        // accepting shortest/longest args as strings
-        base = 1000,
+            ti = {year: 0, month: 1, week: 2, day: 3, hour: 4, minute: 5, second: 6},
+            // HACK: older browser support/performance hack - ti avoids use of Array.indexOf for
+            // accepting shortest/longest args as strings
+            base = 1000,
             time = ms / base,
             shortest = (arguments[2]) ? ti[arguments[2].replace(/s\b/gi, '')] : 6,
             longest = (arguments[1]) ? ti[arguments[1].replace(/s\b/gi, '')] : 0,
