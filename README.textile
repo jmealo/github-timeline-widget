@@ -51,3 +51,5 @@ I don't include a Document Loaded/DOM Ready event to avoid duplicate code. Feel 
 Use the CSS classes *github-timeline-header* to style the header text (defaults to "lucidia grande" 14px bolder black) and *github-timeline-event-text:link* to style the text (defaults to "lucidia grande" 12px black).
 
 See the "github-timeline-widget.css":https://github.com/jmealo/github-timeline-widget/blob/master/github-timeline-widget.css file for all classes.
+
+!https://d2weczhvl823v0.cloudfront.net/jmealo/github-timeline-widget/trend.png(Bitdeli Badge")!
