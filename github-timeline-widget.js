@@ -220,6 +220,12 @@ function GitHubTimeline(options) {
         et.Wiki = et.Gollum;
 
         //eti = icon; ett = text --- these default to the event_type unless otherwise specified
+
+        if(!(event_type in et)) {
+            // ignore events we can't parse
+            return false;
+         }
+
         var eti = et[event_type].i || event_type,
             ett = et[event_type].t || event_type;
 
