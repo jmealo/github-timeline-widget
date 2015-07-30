@@ -1,5 +1,7 @@
 h2. GitHub Timeline Widget
 
+h2. ATTENTION: Sorry folks, GitHub discontinued the API that this widget uses. Feel free to fork and update to the new API :)
+
 The GitHub Timeline Widget allows you to embed your *GitHub activity* on an external website. It's Vanilla JS and doesn't require any libraries.
 
 The size of the JavaScript and CSS stylesheet are:
